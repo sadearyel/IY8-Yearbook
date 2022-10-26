@@ -1,0 +1,53 @@
+body {
+    margin: 0px;
+    height: 100vh;
+
+    font-familiy: 'Inter', sans-serif;
+}
+
+
+/* Styleguide */
+h1 {
+    font-size: 32px;
+}
+h2 {
+    font-size: 14px;
+}
+p {
+    font-size: 16px;
+}
+a {
+    color: black;
+    text-decoration: underline;
+}
+
+
+/* Page sections that only appear ONCE per page */
+#nav {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: calc(100% * (1 / 12));
+    padding-right: calc(100% * (1 / 12));
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+#footer {
+    padding-top: 125px;
+    padding-bottom: 30px;
+    padding-left: calc(100% * (1 / 12));
+    padding-right: calc(100% * (1 / 12));
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+
+/* Reusable block elements */
+.text-block {
+    padding-right: 50%;
+}
