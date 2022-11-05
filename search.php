@@ -52,6 +52,13 @@ if($dbconnection -> errno) {
 
     <form action="results.php">
 
+        <?php   $sql = "SELECT * FROM names ORDER BY name";
+        $results = $dbconnection->query($sql);
+
+        if(!$results) {
+            echo "SQL error: ". $dbconnection->error;
+            exit();
+        }?>
 
         Name: <select name="name">
                 <option value="All">Cohort</option>
@@ -62,6 +69,14 @@ if($dbconnection -> errno) {
                 ?>
         </select>
             <br style="clear:both;">
+
+        <?php   $sql = "SELECT * FROM events ORDER BY event";
+        $results = $dbconnection->query($sql);
+
+        if(!$results) {
+            echo "SQL error: ". $dbconnection->error;
+            exit();
+        }?>
                 Events: <select name="event">
                     <option value="All">Everything</option>
                     <?php
@@ -71,28 +86,17 @@ if($dbconnection -> errno) {
                     ?>
         </select>
                 <br style="clear:both;">
+
                 <div class="label">After Date:</div> <input type="text" name="date" placeholder="yyyy-mm-dd">
+
                 <br style="clear:both;">
+
                 <div class="label">Quote or Images:</div>    <select name="quoteImages">
                     <option>Quote</option>
                     <option>Images</option>
                     <option>Both</option>
-        </select>
+                    </select>
         <br>
-
-            <?php
-
-            $sql = "SELECT * FROM names ORDER BY name";
-            $sql = "SELECT * FROM events";
-
-            $results = $dbconnection->query($sql);
-
-            if(!$results) {
-                echo "SQL error: ". $dbconnection->error;
-                exit();
-            }
-            ?>
-
 
         <br style="clear:both;">
 
