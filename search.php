@@ -105,7 +105,7 @@ if($dbconnection -> errno) {
 
         <br style="clear:both;">
         <br style="clear:both;">
-        <div style="text-align:center;"><input type="submit" value="Search Images" style="background-color: darkolivegreen; color: white; border: 0"></div>
+        <div style="text-align:center;"><input type="submit" value="Search!" style="background-color: darkolivegreen; color: white; border: 0"></div>
 </div>
 </form>
 </body>
