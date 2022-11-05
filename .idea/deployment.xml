@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="PublishConfigData" autoUpload="Always" filePermissions="493" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="irisserver">
+=======
+  <component name="PublishConfigData" autoUpload="Always" serverName="dev2server" filePermissions="493" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="dev2server">
+>>>>>>> Stashed changes
         <serverdata>
           <mappings>
             <mapping deploy="/public_html/acad276/IY8-Yearbook" local="$PROJECT_DIR$" web="/~icleung/acad276/IY8-Yearbook" />
