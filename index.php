@@ -94,6 +94,8 @@ $mysql = new mysqli(
     </div>
 </div>
 
+<img src="Image Uploads/000040370008.jpg">
+
 <div id="gallery">
     <?php
     $sql = "SELECT * FROM images";
@@ -108,7 +110,7 @@ $mysql = new mysqli(
 
         // we assign the row data to a $currentrow variable so that we can access specific columns, ex. image_link
         $currentrow = $results -> data_seek($randnum);
-        echo "<img src = '" . $currentrow["image_link"] . "'>";
+        echo "<img src = 'Image%20Uploads/" . $currentrow["image_name"] . "'>";
     }
     ?>
 </div>
