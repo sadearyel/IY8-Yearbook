@@ -27,7 +27,7 @@ $dbconnection = new mysqli ($host, $userid, $userpw, $db);
 
 if($dbconnection -> errno) {
     echo "DB CONNECTION ERROR!<br>";
-    echo $dbconnection -> connect_error;
+    echo $dbconnection->connect_error;
     exit();
 }
 ?>
