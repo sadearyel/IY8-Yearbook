@@ -92,9 +92,8 @@ if($dbconnection -> errno) {
                 <br style="clear:both;">
 
                 <div class="label">Quote or Images:</div>    <select name="quoteImages">
-                    <option>Quote</option>
                     <option>Images</option>
-                    <option>Both</option>
+                    <option>Quotes</option>
                     </select>
         <br>
 
