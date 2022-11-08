@@ -70,24 +70,25 @@ if($dbconnection -> errno) {
 </head>
 <body>
 <div id="container">
-    <h1>Search results</h1> <hr>
+    <h1>Your Results!</h1> <hr>
     <?php
-if($_REQUEST['quotesImages'] = "Images"){
-    $sql = "SELECT * FROM imagesView WHERE 1=1";
-    if($_REQUEST['name'] != "ALL") {
+
+
+    $sql = "SELECT * FROM imagesView";
+    if ($_REQUEST['date'] != " ") {
+        $sql = $sql . "
+    WHERE date > '" . $_REQUEST["date"] . "'";
+    }
+    if ($_REQUEST['name'] != "ALL") {
         $sql .= " AND name ='" . $_REQUEST["name"] . "'";
     }
-    if($_REQUEST['event'] != "ALL") {
+    if ($_REQUEST['event'] != "ALL") {
         $sql .= " AND event ='" . $_REQUEST["event"] . "'";
-    }
-    if($_REQUEST['date'] != " " ) {
-        $sql = $sql . "
-    WHERE date > '" . $_REQUEST["date"] . "'" ;
     };
 
     $results = $dbconnection->query($sql);
 
-    if(!$results) {
+    if (!$results) {
         echo "<hr>Your SQL:<br> " . $sql . "<br><br>";
         echo "SQL Error: " . $dbconnection->error . "<hr>";
         exit();
@@ -95,73 +96,58 @@ if($_REQUEST['quotesImages'] = "Images"){
 
     echo "<em>Your results returned <strong>" .
         $results->num_rows .
-        "</strong> results.</em>";
+        "</strong> image(s).</em>";
     echo "<br><br>";
 
-    while($currentrow = $results->fetch_assoc()) {
+    while ($currentrow = $results->fetch_assoc()) {
         echo "<div class='title'><strong>" .
-            "<img src='" . $currentrow['image_name'] . "' class='thumb'>" .
-            $currentrow['name'] .
-            $currentrow['event'] .
-            "</strong>".
-            "<a href='detail.php?yearbookID=" . $currentrow["image_id"]."'>" .
-            "[View]" . "</a>" .
-            " (<em> Date: " . $currentrow['date'] . "</em>) </div>" .
-            "<div class='link''>" . "  " . "</div>"  .
+            "<a href='details.php?yearbookID=" . $currentrow["image_id"] . "'>" .
+            "<img src='" . $currentrow['image_name'] . "' class='thumb'>" . "</a>" .
+            "</strong>" .
+            "<div class='link''>" . "  " . "</div>" .
             "<br style='clear:both;'>";
 
 
     }
 
-}
     ?>
-
-
     <?php
-    if($_REQUEST['quotesImages'] = "Quotes") {
-        $sql = "SELECT * FROM quotesView WHERE 1=1";
-        if ($_REQUEST['name'] != "ALL") {
-            $sql .= " AND name ='" . $_REQUEST["name"] . "'";
-        }
-        if ($_REQUEST['event'] != "ALL") {
-            $sql .= " AND event ='" . $_REQUEST["event"] . "'";
-        }
-        if ($_REQUEST['date'] != " ") {
-            $sql = $sql . "
+
+    $sql = "SELECT * FROM quotesView";
+    if ($_REQUEST['date'] != " ") {
+        $sql = $sql . "
     WHERE date > '" . $_REQUEST["date"] . "'";
-        };
+    }
+    if ($_REQUEST['name'] != "ALL") {
+        $sql .= " AND name ='" . $_REQUEST["name"] . "'";
+    }
+    if ($_REQUEST['event'] != "ALL") {
+        $sql .= " AND event ='" . $_REQUEST["event"] . "'";
+    };
 
-        $results = $dbconnection->query($sql);
+    $results = $dbconnection->query($sql);
 
-        if (!$results) {
-            echo "<hr>Your SQL:<br> " . $sql . "<br><br>";
-            echo "SQL Error: " . $dbconnection->error . "<hr>";
-            exit();
-        }
+    if (!$results) {
+        echo "<hr>Your SQL:<br> " . $sql . "<br><br>";
+        echo "SQL Error: " . $dbconnection->error . "<hr>";
+        exit();
+    }
 
-        echo "<em>Your results returned <strong>" .
-            $results->num_rows .
-            "</strong> results.</em>";
-        echo "<br><br>";
+    echo "<em>Your results returned <strong>" .
+        $results->num_rows .
+        "</strong> quote(s).</em>";
+    echo "<br><br>";
 
-        while ($currentrow = $results->fetch_assoc()) {
-            echo "<div class='title'><strong>" .
-                $currentrow['name'] .
-                $currentrow['event'] .
-                $currentrow['quote'] .
-                "</strong>" .
-                "<a href='detail.php?yearbookID=" . $currentrow["image_id"] . "'>" .
-                "[View]" . "</a>" .
-                " (<em> Date: " . $currentrow['date'] . "</em>) </div>" .
-                "<div class='link''>" . "  " . "</div>" .
-                "<br style='clear:both;'>";
-
-
-        }
+    while ($currentrow = $results->fetch_assoc()) {
+        echo "<div class='title'><strong>" .
+            "<a href='details2.php?yearbookID=" . $currentrow["quote_id"] . "'>" .
+            $currentrow['quote'] . "</a>" .
+            "</strong>" .
+            "<div class='link''>" . "  " . "</div>" .
+            "<br style='clear:both;'>";
 
     }
     ?>
-
 </div>
 
 </body></html>

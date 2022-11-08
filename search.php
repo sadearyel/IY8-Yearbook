@@ -61,14 +61,14 @@ if($dbconnection -> errno) {
         }?>
 
         Name: <select name="name">
-                <option value="All">Cohort</option>
-                <?php
-                while($currentrow = $results->fetch_assoc()){
-                    echo "<option>" . $currentrow["name"]."</option>";
-                }
-                ?>
+            <option value="ALL"> Cohort </option>
+            <?php
+            while($currentrow = $results->fetch_assoc()){
+                echo "<option>" . $currentrow["name"]."</option>";
+            }
+            ?>
         </select>
-            <br style="clear:both;">
+        <br style="clear:both;">
 
         <?php   $sql = "SELECT * FROM events ORDER BY event";
         $results = $dbconnection->query($sql);
@@ -77,24 +77,25 @@ if($dbconnection -> errno) {
             echo "SQL error: ". $dbconnection->error;
             exit();
         }?>
-                Events: <select name="event">
-                    <option value="All">Everything</option>
-                    <?php
-                    while($currentrow = $results->fetch_assoc()){
-                        echo "<option>" . $currentrow["event"]."</option>";
-                    }
-                    ?>
+        Events: <select name="event">
+            <option value="ALL">Everything</option>
+            <?php
+            while($currentrow = $results->fetch_assoc()){
+                echo "<option>" . $currentrow["event"]."</option>";
+            }
+            ?>
         </select>
-                <br style="clear:both;">
+        <br style="clear:both;">
 
-                <div class="label">After Date:</div> <input type="text" name="date" placeholder="yyyy-mm-dd">
+        <div class="label">After Date:</div> <input type="text" name="date" placeholder="yyyy-mm-dd">
 
-                <br style="clear:both;">
+        <br style="clear:both;">
 
-                <div class="label">Quote or Images:</div>    <select name="quoteImages">
-                    <option>Images</option>
-                    <option>Quotes</option>
-                    </select>
+        <div class="label">Quote or Images:</div>    <select name="quoteImages">
+            <option>Images</option>
+            <option>Quotes</option>
+            <option>Both</option>
+        </select>
         <br>
 
         <br style="clear:both;">
