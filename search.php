@@ -47,7 +47,13 @@ if($dbconnection -> errno) {
 
 <body>
 <div id="container">
-    <div style="text-align: center"><h1>IY8 Yearbook Search!</h1><br><em>please enter all information</em></div>
+    <div style="text-align: center">
+        <h1>IY8 Yearbook Search!</h1>
+        <br>
+        <em>please enter all information</em>
+        <br>
+        <p>Currently the database is only populated with images from 2022-02-09. You will be redirected to the search page if a valid date isn't entered.</p>
+    </div>
     <hr>
 
     <form action="results.php">
@@ -91,7 +97,8 @@ if($dbconnection -> errno) {
 
         <br style="clear:both;">
 
-        <div class="label">Quote or Images:</div>    <select name="quoteImages">
+        <div class="label">Quote or Images:</div>
+        <select name="quoteImages">
             <option>Images</option>
             <option>Quotes</option>
             <option>Both</option>
