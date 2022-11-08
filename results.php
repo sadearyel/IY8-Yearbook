@@ -71,7 +71,6 @@ if($dbconnection -> errno) {
 <body>
 <div id="container">
     <h1>Search results</h1> <hr>
-//If statement IMAGES
     <?php
 if($_REQUEST['quotesImages'] = "Images"){
     $sql = "SELECT * FROM imagesView WHERE 1=1";
@@ -84,7 +83,7 @@ if($_REQUEST['quotesImages'] = "Images"){
     if($_REQUEST['date'] != " " ) {
         $sql = $sql . "
     WHERE date > '" . $_REQUEST["date"] . "'" ;
-    }
+    };
 
     $results = $dbconnection->query($sql);
 
@@ -117,7 +116,6 @@ if($_REQUEST['quotesImages'] = "Images"){
 }
     ?>
 
-//If Statement QUOTES
 
     <?php
     if($_REQUEST['quotesImages'] = "Quotes") {
@@ -131,7 +129,7 @@ if($_REQUEST['quotesImages'] = "Images"){
         if ($_REQUEST['date'] != " ") {
             $sql = $sql . "
     WHERE date > '" . $_REQUEST["date"] . "'";
-        }
+        };
 
         $results = $dbconnection->query($sql);
 
