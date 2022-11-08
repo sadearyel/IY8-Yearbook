@@ -19,18 +19,16 @@ var_dump($_FILES);
 $filepath = $_SERVER["CONTEXT_DOCUMENT_ROOT"] . "/acad276/IY8-Yearbook/Image Uploads/";
 move_uploaded_file($_FILES["newimage"]["tmp_name"], $filepath . $_FILES["newimage"]["name"]);
 
-echo "<br><br>" . $filepath . $FILES["newimage"]["name"];
-
 // THIS SECTION IS INCOMPLETE
 // Then, add the new image to the Images table with all the necessary info
 $sql = "INSERT INTO images
-        (image_type_id, name_id, image_link, date, event_id)
+        (image_type_id, name_id, image_name, date, event_id)
         VALUES
         (" . $_REQUEST["image-type"] . ",
         " . $_REQUEST["photographer"] . ",
-        " . "" . ",
+        '" . $_FILES["newimage"]["name"] . "',
         '" . $_REQUEST["date"] . "',
-        " . $_REQUEST["event_id"] . ")";
+        " . $_REQUEST["event"] . ")";
 
 $results = $mysql -> query($sql);
 
@@ -40,5 +38,4 @@ if(!$results) {
 } else {
     echo "SUCCESS! Image added.";
 }
-
 ?>

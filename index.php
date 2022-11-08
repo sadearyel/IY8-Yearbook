@@ -40,17 +40,18 @@ $mysql = new mysqli(
         }
         #gallery {
             padding-top: 100px;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
             padding-left: 0px;
             padding-right: 0px;
 
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             justify-content: space-between;
         }
         #gallery img {
             width: 10.001%;
+            padding-bottom: 10px;
         }
         #timeline {
             padding-top: 125px;
@@ -106,9 +107,12 @@ $mysql = new mysqli(
         // rand(int min, int max) function allows us to randomly generate an existing row number from the images table
         $randnum = rand(1, $numrows);
 
+        $sql_rand = "SELECT * FROM images WHERE image_id = " . $randnum;
+        $results_rand = $mysql -> query($sql_rand);
+
         // we assign the row data to a $currentrow variable so that we can access specific columns, ex. image_link
-        $currentrow = $results -> data_seek($randnum);
-        echo "<img src = '" . $currentrow["image_link"] . "'>";
+        $currentrow = $results_rand -> fetch_assoc();
+        echo "<img src = 'Image Uploads/" . $currentrow["image_name"] . "'>";
     }
     ?>
 </div>

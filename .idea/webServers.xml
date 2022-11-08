@@ -2,11 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-<<<<<<< Updated upstream
-      <webServer id="f3aae005-61b3-4f69-9458-f6073ce08cba" name="irisserver" url="http://webdev.iyaclasses.com">
-=======
-      <webServer id="83411380-9660-4ad4-a0ad-110ea1e61fdf" name="dev2server" url="http://webdev.iyaclasses.com">
->>>>>>> Stashed changes
+      <webServer id="218c547a-94a7-4ac0-9321-1606dca6aef2" name="dev2server" url="http://webdev.iyaclasses.com">
         <fileTransfer host="webdev.iyaclasses.com" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
