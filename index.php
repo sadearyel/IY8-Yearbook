@@ -38,21 +38,6 @@ $mysql = new mysqli(
 
             text-align: center;
         }
-        #gallery {
-            padding-top: 100px;
-            padding-bottom: 90px;
-            padding-left: 0px;
-            padding-right: 0px;
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        #gallery img {
-            width: 10.001%;
-            padding-bottom: 10px;
-        }
         #timeline {
             padding-top: 125px;
             padding-bottom: 125px;

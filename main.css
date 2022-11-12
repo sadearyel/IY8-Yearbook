@@ -32,6 +32,21 @@ a {
     flex-wrap: nowrap;
     justify-content: space-between;
 }
+#gallery {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#gallery img {
+    width: 10.001%;
+    padding-bottom: 10px;
+}
 #footer {
     padding-top: 125px;
     padding-bottom: 30px;

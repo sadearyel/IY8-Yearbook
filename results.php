@@ -36,21 +36,19 @@ if($dbconnection -> errno) {
 
     <style>
         body {
-            background-color: burlywood;
-            margin: 0 200px;
-            text-align: center;
+            font-family: 'Inter', sans-serif;
         }
-        #container {
-            padding: 30px;
-            margin-top: 100px;
-            background-color: olive;
-            width: 650px;
-            text-align: left;
-            color:white;
+        #summary {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-left: calc(100% * (1 / 12));
+            padding-right: calc(100% * (1 / 12));
         }
         .thumb {
-            width: 100px;
+            width: 10%;
         }
+
+        /* Not yet used, might delete this later */
         .link {
             width: 100px;
             float:left;
@@ -77,30 +75,57 @@ if($dbconnection -> errno) {
     </div>
 </div>
 
-<div id="container">
-    <h1>Your Results!</h1> <hr>
+<div id="summary">
+    <h1>
+        YOU SEARCHED FOR
+
     <?php
     // first see whether the user is searching for images, quotes, or both types of records
     if($_REQUEST['quoteImages'] == 'Images') { // only searching for images
 
+        // first complete the rest of the result summary html block
+        echo "IMAGES";
+        echo "</h1>";
+        echo "<p>";
+
+        // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM imagesView";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
+            echo "Photographed by " . $_REQUEST["name"];
+        } else {
+            echo "Photographed by anyone in the cohort";
         }
+
+        echo "<br>";
+
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
+            echo "At event " . $_REQUEST["event"];
+        } else {
+            echo "At any event";
         }
+
+        echo "<br>";
+
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Taken after date " . $_REQUEST["date"];
+        } else {
+            echo "Taken at any date";
         }
+
+        echo "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
-        echo "<strong>" . $results -> num_rows . "</strong>";
+        echo $results -> num_rows;
         echo " image(s) </em>";
+
         echo "<br><br>";
+        echo "</p>";
 
         while($currentrow = $results -> fetch_assoc()) {
             echo "<div class='title'>";
@@ -116,24 +141,49 @@ if($dbconnection -> errno) {
 
     } else if($_REQUEST['quoteImages'] == 'Quotes') { // only searching for quotes
 
+        // first complete the rest of the result summary html block
+        echo "QUOTES";
+        echo "</h1>";
+        echo "<p>";
+
+        // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM quotesView";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
+            echo "Said by " . $_REQUEST["name"];
+        } else {
+            echo "Said by anyone in the cohort";
         }
+
+        echo "<br>";
+
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
+            echo "At event " . $_REQUEST["event"];
+        } else {
+            echo "At any event";
         }
+
+        echo "<br>";
+
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Said after date " . $_REQUEST["date"];
+        } else {
+            echo "Said at any date";
         }
+
+        echo "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
-        echo "<strong>" . $results -> num_rows . "</strong>";
+        echo $results -> num_rows;
         echo " quote(s) </em>";
+
         echo "<br><br>";
+        echo "</p>";
 
         while($currentrow = $results -> fetch_assoc()) {
             echo "<div class='title'>";
@@ -149,25 +199,48 @@ if($dbconnection -> errno) {
 
     } else if($_REQUEST['quoteImages'] == 'Both') { // seaching for both
 
+        echo "IMAGES AND QUOTES";
+        echo "</h1>";
+        echo "<p>";
+
         // display images first
         $sql = "SELECT * FROM imagesView";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
+            echo "Photographed by " . $_REQUEST["name"];
+        } else {
+            echo "Photographed by anyone in the cohort";
         }
+
+        echo "<br>";
+
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
+            echo "At event " . $_REQUEST["event"];
+        } else {
+            echo "At any event";
         }
+
+        echo "<br>";
+
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Taken after date " . $_REQUEST["date"];
+        } else {
+            echo "Taken at any date";
         }
+
+        echo "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
-        echo "<strong>" . $results -> num_rows . "</strong>";
+        echo $results -> num_rows;
         echo " image(s) </em>";
+
         echo "<br><br>";
+        echo "</p>";
 
         while($currentrow = $results -> fetch_assoc()) {
             echo "<div class='title'>";
@@ -182,24 +255,45 @@ if($dbconnection -> errno) {
         }
 
         // display quotes second
+        echo "<p>";
+
         $sql = "SELECT * FROM quotesView";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
+            echo "Said by " . $_REQUEST["name"];
+        } else {
+            echo "Said by anyone in the cohort";
         }
+
+        echo "<br>";
+
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
+            echo "At event " . $_REQUEST["event"];
+        } else {
+            echo "At any event";
         }
+
+        echo "<br>";
+
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Said after date " . $_REQUEST["date"];
+        } else {
+            echo "Said at any date";
         }
+
+        echo "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
-        echo "<strong>" . $results -> num_rows . "</strong>";
+        echo $results -> num_rows;
         echo " quote(s) </em>";
+
         echo "<br><br>";
+        echo "</p>";
 
         while($currentrow = $results -> fetch_assoc()) {
             echo "<div class='title'>";
@@ -215,5 +309,21 @@ if($dbconnection -> errno) {
     }
     ?>
 </div>
+
+<div id="footer">
+    <div style="text-align: left; flex-grow: 5;">
+        <h2>
+            THANKS FOR POPPING BY!
+            <br><br>
+            THIS SITE IS NOT ASSOCIATED WITH THE IOVINE AND YOUNG ACADEMY OR THE UNIVERSITY OF SOUTHERN CALIFORNIA.
+        </h2>
+    </div>
+    <div style="text-align: right; flex-grow: 5;">
+        <h2>
+            <a>CONTACT FOUNDING TEAM</a>
+        </h2>
+    </div>
+</div>
+
 </body>
 </html>
