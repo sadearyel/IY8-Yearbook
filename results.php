@@ -38,11 +38,13 @@ if($dbconnection -> errno) {
         body {
             font-family: 'Inter', sans-serif;
         }
-        #summary {
+        #results {
             padding-top: 100px;
             padding-bottom: 100px;
             padding-left: calc(100% * (1 / 12));
             padding-right: calc(100% * (1 / 12));
+
+            text-align: center;
         }
         .thumb {
             width: 10%;
@@ -75,8 +77,8 @@ if($dbconnection -> errno) {
     </div>
 </div>
 
-<div id="summary">
-    <h1>
+<div id="results">
+    <h1 class="section-title">
         YOU SEARCHED FOR
 
     <?php

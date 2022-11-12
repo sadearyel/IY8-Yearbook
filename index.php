@@ -103,9 +103,9 @@ $mysql = new mysqli(
 </div>
 
 <div id="intro">
-    <p class="section-title">
+    <h1 class="section-title">
         INTRO
-    </p>
+    </h1>
     <p>
         A growing collection of memories from USC’s Iovine and Young Academy. Tagged images and funny quotes, conveniently categorized by date and event.
         <br><br>
@@ -116,9 +116,11 @@ $mysql = new mysqli(
 </div>
 
 <div id="timeline">
-    <p class="section-title">
+    <h1 class="section-title">
         CATEGORIZED BY TAGGED EVENTS
-    </p>
+
+        <!-- unfinished construction zone!--!>
+    </h1>
 </div>
 
 <!-- cta refers to a "Call to Action" section - a section that prompts the user to do something --!>
@@ -127,9 +129,9 @@ $mysql = new mysqli(
         <img src="Site%20Images/home-pizza.png" style="width: 100%;">
     </div>
     <div style="margin-left: 10%; width: 40%;">
-        <p class="section-title">
+        <h1 class="section-title">
             ADD YOUR MEMORIES
-        </p>
+        </h1>
         <p>
             Contribute today to our growing colletion. Create an account or sign in to an existing account to submit your own images and quotes.
             <br><br>
