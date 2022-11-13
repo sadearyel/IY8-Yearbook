@@ -82,12 +82,17 @@ if($dbconnection -> errno) {
     </div>
     <div style="text-align: center; flex-grow: 4;">
         <h2>
-            IOVINE AND YOUNG ACADEMY YEARBOOK
+            <a href="index.php">IOVINE AND YOUNG ACADEMY YEARBOOK</a>
         </h2>
     </div>
-    <div style="text-align: right; flex-grow: 3;">
+    <div style="text-align: right; flex-grow: 2;">
         <h2>
             <a>LOGIN</a>
+        </h2>
+    </div>
+    <div style="text-align: right; flex-grow: 1;">
+        <h2>
+            <a href="search.php">SEARCH</a>
         </h2>
     </div>
 </div>

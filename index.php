@@ -30,6 +30,21 @@ $mysql = new mysqli(
         body {
             font-family: 'Inter', sans-serif;
         }
+        #gallery {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        #gallery img {
+            width: 10.001%;
+            padding-bottom: 10px;
+        }
         #intro {
             padding-top: 125px;
             padding-bottom: 125px;
@@ -70,12 +85,17 @@ $mysql = new mysqli(
     </div>
     <div style="text-align: center; flex-grow: 4;">
         <h2>
-            IOVINE AND YOUNG ACADEMY YEARBOOK
+            <a href="index.php">IOVINE AND YOUNG ACADEMY YEARBOOK</a>
         </h2>
     </div>
-    <div style="text-align: right; flex-grow: 3;">
+    <div style="text-align: right; flex-grow: 2;">
         <h2>
             <a>LOGIN</a>
+        </h2>
+    </div>
+    <div style="text-align: right; flex-grow: 1;">
+        <h2>
+            <a href="search.php">SEARCH</a>
         </h2>
     </div>
 </div>
