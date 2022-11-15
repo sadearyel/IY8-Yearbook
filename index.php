@@ -122,6 +122,7 @@ $mysql = new mysqli(
     ?>
 </div>
 
+<!--
 <div id="intro">
     <h1 class="section-title">
         INTRO
@@ -134,6 +135,7 @@ $mysql = new mysqli(
         Ellie, Iris, Jenna, Kate, Sade
     </p>
 </div>
+--!>
 
 <div id="timeline">
     <h1 class="section-title">
