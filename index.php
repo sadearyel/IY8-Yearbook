@@ -122,7 +122,6 @@ $mysql = new mysqli(
     ?>
 </div>
 
-<!--
 <div id="intro">
     <h1 class="section-title">
         INTRO
@@ -135,15 +134,14 @@ $mysql = new mysqli(
         Ellie, Iris, Jenna, Kate, Sade
     </p>
 </div>
---!>
 
+<!--
 <div id="timeline">
     <h1 class="section-title">
         CATEGORIZED BY TAGGED EVENTS
-
-        <!-- unfinished construction zone!--!>
     </h1>
 </div>
+__!>
 
 <!-- cta refers to a "Call to Action" section - a section that prompts the user to do something --!>
 <div id="cta">
