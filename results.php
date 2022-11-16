@@ -134,7 +134,18 @@ if($dbconnection -> errno) {
         echo "<br><br>";
         echo "</p>";
 
+        // pagination code
+        $start = 1;
+        if(!empty($_REQUEST["start"])) {
+            $start = $_REQUEST["start"];
+        }
+        $end = $start + 19;
+        $i = $start - 1;
+        $results -> data_seek($i);
+
         while($currentrow = $results -> fetch_assoc()) {
+            $i++;
+
             echo "<div class='title'>";
             echo "<strong>";
             echo "<a href='details.php?yearbookID=" . $currentrow["image_id"] . "'>";
@@ -144,7 +155,27 @@ if($dbconnection -> errno) {
             echo "<div class='link'>" . "" . "</div>";
             echo "</div>";
             echo "<br style='clear: both;'>";
+
+            if($i == $end) {
+              break;
+            }
         }
+
+        $url = "results.php?";
+        $url .= "name=" . $_REQUEST["name"];
+        $url .= "&event=" . $_REQUEST["event"];
+        $url .= "&date=" . $_REQUEST["date"];
+        $url .= "&quoteImages=" . $_REQUEST["quoteImages"];
+        $url .= "&start=" . ($end + 1);
+
+        echo "<br><br>";
+        echo "Currently displaying records " . $start . " through " . $end . ".";
+
+        echo "<a href='" . $url . "'>";
+        echo "<div style='margin-top: 50px; margin-left: 40%; margin-right: 40%; padding-top: 12px; padding-bottom: 12px; width: 20%; background-color: black; color: white; border-radius: 4px;'>";
+        echo "Next";
+        echo "</div>";
+        echo "</a>";
 
     } else if($_REQUEST['quoteImages'] == 'Quotes') { // only searching for quotes
 
@@ -193,7 +224,18 @@ if($dbconnection -> errno) {
         echo "<br><br>";
         echo "</p>";
 
+        // pagination code
+        $start = 1;
+        if(!empty($_REQUEST["start"])) {
+            $start = $_REQUEST["start"];
+        }
+        $end = $start + 19;
+        $i = $start - 1;
+        $results -> data_seek($i);
+
         while($currentrow = $results -> fetch_assoc()) {
+            $i++;
+
             echo "<div class='title'>";
             echo "<strong>";
             echo "<a href='details2.php?yearbookID=" . $currentrow["quote_id"] . "'>";
@@ -203,7 +245,27 @@ if($dbconnection -> errno) {
             echo "<div class='link'>" . "" . "</div>";
             echo "</div>";
             echo "<br style='clear: both;'>";
+
+            if($i == $end) {
+                break;
+            }
         }
+
+        $url = "results.php?";
+        $url .= "name=" . $_REQUEST["name"];
+        $url .= "&event=" . $_REQUEST["event"];
+        $url .= "&date=" . $_REQUEST["date"];
+        $url .= "&quoteImages=" . $_REQUEST["quoteImages"];
+        $url .= "&start=" . ($end + 1);
+
+        echo "<br><br>";
+        echo "Currently displaying records " . $start . " through " . $end . ".";
+
+        echo "<a href='" . $url . "'>";
+        echo "<div style='margin-top: 50px; margin-left: 40%; margin-right: 40%; padding-top: 12px; padding-bottom: 12px; width: 20%; background-color: black; color: white; border-radius: 4px;'>";
+        echo "Next";
+        echo "</div>";
+        echo "</a>";
 
     } else if($_REQUEST['quoteImages'] == 'Both') { // seaching for both
 
