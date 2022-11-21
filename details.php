@@ -71,7 +71,7 @@ if($dbconnection -> errno) {
     while($currentrow = $results->fetch_assoc()) {
         echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 80%;'>";
         echo "<p>";
-        echo "Photographer: " . $currentrow["name"];
+        echo "Photographer: " . "<a href='" . "'>" . $currentrow["name"] . "</a>";
         echo "<br>";
         echo "Event: " . $currentrow["event"];
         echo "<br>";
