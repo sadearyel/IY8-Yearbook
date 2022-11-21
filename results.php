@@ -105,7 +105,6 @@ if($dbconnection -> errno) {
 
         echo "<br><br>";
 
-        echo $sql;
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";

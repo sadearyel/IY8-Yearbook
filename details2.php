@@ -76,6 +76,7 @@ if($dbconnection -> errno) {
         echo "Date: " . $currentrow["date"];
         echo "</p>";
     }
+
     ?>
 
 </div>
