@@ -1,16 +1,16 @@
 <?php
-
+// redirect page visitors to the search page if it was accessed in error
 if(empty($_REQUEST["yearbookID"])){
-    echo "ERROR. Please go through the"
-    ?>
-    <a href=search.php'>search page.</a>
-    <?php
+    header('Location: search.php');
     exit();
 }
+
+// connect to db
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
 $db = "icleung_yearbook";
+
 $dbconnection = new mysqli ($host, $userid, $userpw, $db);
 
 if($dbconnection -> errno) {
@@ -18,71 +18,69 @@ if($dbconnection -> errno) {
     echo $dbconnection -> connect_error;
     exit();
 }
-
 ?>
-    <html>
-    <head>
-        <title>Your Results</title>
-        <style>
-            body {
-                background-color: burlywood;
-                margin: 0 200px;
-                text-align: center;
-            }
+<html lang="en">
+<head>
+    <title>IY8 Yearbook - Quote Details</title>
+    <link rel="shortcut icon" type="image/jpg" href="">
 
-            #container {
-                padding: 30px;
-                margin-top: 100px;
-                background-color: olive;
-                width: 650px;
-                text-align: left;
-                color:white;
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 
-            .className {
-                width: 500px;
+    <link rel="stylesheet" href="main.css">
 
-                float:left;
-            }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
 
-            .link {
-                width: 100px;
-                float:left;
-                margin-left: 50px;
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #container {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-left: calc(100% * (1 / 12));
+            padding-right: calc(100% * (1 / 12));
 
-            }
-            .detail {
-                width: 500px; float:left;
-            }
-        </style>
-    </head>
-    <body></body>
-    </html>
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
+<?php include "Global Elements/nav.php"; ?>
 
-<?php
+<div id="container">
+    <h1 class="section-title">
+        QUOTE DETAILS
+    </h1>
 
-$sql = "SELECT * from quotesView WHERE quote_id = " . $_REQUEST["yearbookID"];
+    <?php
 
-$results = $dbconnection -> query($sql);
-if(!results) {
-    echo "ERROR: " . $dbconnection -> error;
-}
+    $sql = "SELECT * from quotesView WHERE quote_id = " . $_REQUEST["yearbookID"];
 
-while($currentrow = $results->fetch_assoc()) {
-    echo "<div class='title'><strong>" .
-        "Name: " .
-        $currentrow['name'] .
-        "<br>" .
-        "Quote: " .
-        $currentrow['quote'] .
-        "<br>" .
-        "</strong>".
-        " (<em> Date: " . $currentrow['date'] . "</em>) </div>" .
-        "<div class='link''>" . "  " . "</div>"  .
-        "<br style='clear:both;'>";
+    $results = $dbconnection -> query($sql);
 
+    // checking for errors
+    if(!results) {
+        echo "ERROR: " . $dbconnection -> error;
+    }
 
-}
+    while($currentrow = $results->fetch_assoc()) {
+        echo "<p>";
+        echo "Name: " . $currentrow["name"];
+        echo "<br>";
+        echo "Quote: " . $currentrow["quote"];
+        echo "<br>";
+        echo "Date: " . $currentrow["date"];
+        echo "</p>";
+    }
+    ?>
 
-?>
+</div>
+
+<?php include "Global Elements/footer.php"; ?>
+
+</body>
+</html>

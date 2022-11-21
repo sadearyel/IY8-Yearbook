@@ -74,28 +74,8 @@ if($dbconnection -> errno) {
     </style>
 </head>
 <body>
-<div id="nav">
-    <div style="text-align: left; flex-grow: 3;">
-        <h2>
-            LOS ANGELES, CALIFORNIA
-        </h2>
-    </div>
-    <div style="text-align: center; flex-grow: 4;">
-        <h2>
-            <a href="index.php">IOVINE AND YOUNG ACADEMY YEARBOOK</a>
-        </h2>
-    </div>
-    <div style="text-align: right; flex-grow: 2;">
-        <h2>
-            <a>LOGIN</a>
-        </h2>
-    </div>
-    <div style="text-align: right; flex-grow: 1;">
-        <h2>
-            <a href="search.php">SEARCH</a>
-        </h2>
-    </div>
-</div>
+
+<?php include "Global Elements/nav.php"; ?>
 
 <div id="container">
     <div style="text-align: center; margin-bottom: 50px;">
@@ -185,20 +165,7 @@ if($dbconnection -> errno) {
     </form>
 </div>
 
-<div id="footer">
-    <div style="text-align: left; flex-grow: 5;">
-        <h2>
-            THANKS FOR POPPING BY!
-            <br><br>
-            THIS SITE IS NOT ASSOCIATED WITH THE IOVINE AND YOUNG ACADEMY OR THE UNIVERSITY OF SOUTHERN CALIFORNIA.
-        </h2>
-    </div>
-    <div style="text-align: right; flex-grow: 5;">
-        <h2>
-            <a>CONTACT FOUNDING TEAM</a>
-        </h2>
-    </div>
-</div>
+<?php include "Global Elements/footer.php"; ?>
 
 </body>
 </html>
