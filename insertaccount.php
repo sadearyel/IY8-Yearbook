@@ -52,6 +52,50 @@ if($dbconnection -> errno) {
     <div style="text-align: center"><h1>IY8 Yearbook: Create An Account</h1><br><em>please enter all information</em></div>
     <hr>
 
+
+    <form>
+        <label for="username">
+            Username:
+        </label>
+        <input type="text" name="username">
+
+        <br><br>
+
+        <label for="password">
+            Password:
+        </label>
+        <input type="text" name="password">
+
+        <br><br>
+
+        <label for="name">
+            Choose Your Name:
+        </label>
+        <select name="name">
+            <?php
+            $sql_names = "SELECT * FROM names ORDER BY name";
+            $results_names = $dbconnection -> query($sql_names);
+
+            if(!$results_names) {
+                echo "SQL error: ". $dbconnection -> error;
+                exit();
+            }
+
+            while($currentrow = $results_names -> fetch_assoc()) {
+                echo "<option>" . $currentrow["name"] . "</option>";
+            }
+            ?>
+        </select>
+
+        <br><br>
+
+        <input type="submit" value="Log In">
+    </form>
+
+
+
+
+
     <form action="insertaccount.php">
 
         Select Your Name: <select name="name">

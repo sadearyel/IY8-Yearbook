@@ -1,8 +1,10 @@
 <?php
+// connect to db
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
 $db = "icleung_yearbook";
+
 $dbconnection = new mysqli ($host, $userid, $userpw, $db);
 
 if($dbconnection -> errno) {
@@ -11,55 +13,140 @@ if($dbconnection -> errno) {
     exit();
 }
 ?>
-<html>
+
+<html lang="en">
 <head>
-    <title>IY8 Yearbook Login!</title>
+    <title>IY8 Yearbook - Login</title>
+    <link rel="shortcut icon" type="image/jpg" href="">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <link rel="stylesheet" href="main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #container {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-left: calc(100% * (1 / 12));
+            padding-right: calc(100% * (1 / 12));
+
+            text-align: center;
+        }
+        form {
+            width: 60%;
+            padding-left: 20%;
+            padding-right: 20%;
+
+            text-align: left;
+        }
+        input[type=text], select {
+            width: 100%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            width: 100%;
+            margin-top: 50px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<style>
-    body {
-        background-color: burlywood;
-        margin: 0 200px;
-        text-align: center;
-    }
-
-    #container {
-        padding: 30px;
-        margin-top: 100px;
-        background-color: olive;
-        width: 300px;
-        text-align: left;
-        color:white;
-    }
-
-    .label {
-        float:left;
-        clear:both;
-        width: 120px;
-    }
-    h1{
-        margin-bottom: -15px;
-    }
-</style>
-
 <body>
+
+<?php include "Global Elements/nav.php"; ?>
+
 <div id="container">
-    <div style="text-align: center"><h1>IY8 Yearbook Login!</h1><br><em>new to the site? <a href='search.php'>create an account here.</a> </em></div>
-    <hr>
 
-    <form action="loginresults.php">
+    <?php
+    session_start();
+    $_SESSION["loggedin"] == "";
 
-        <div class="label">Username:</div> <input type="text" name="username" placeholder="Username">
+    if(!empty($_REQUEST["password"])) {
+        $sql = "SELECT * FROM users WHERE username = '" . $_REQUEST["username"] . "' AND password = '" . $_REQUEST["password"] . "'";
 
-        <br style="clear:both;">
+        echo $sql . "<br><br>";
+        exit();
+    } else if(empty($_SESSION["loggedin"])) {
+        ?>
 
-        <div class="label">Password:</div> <input type="text" name="password" placeholder="Password">
+        <h1 class="section-title">
+            LOGIN PAGE
+        </h1>
+        <p>
+            Please log in to access the entire site. New to the site? Create an account <a href="insertaccount.php">here</a>.
+            <br><br>
+        </p>
+        <form>
+            <label for="username">
+                Username:
+            </label>
+            <input type="text" name="username">
 
-        <br style="clear:both;">
+            <br><br>
 
-        <br style="clear:both;">
-        <br style="clear:both;">
-        <div style="text-align:center;"><input type="submit" value="Login!" style="background-color: darkolivegreen; color: white; border: 0"></div>
+            <label for="password">
+                Password:
+            </label>
+            <input type="text" name="password">
+
+            <br><br>
+
+            <label for="name">
+                Choose Your Name:
+            </label>
+            <select name="name">
+                <?php
+                $sql_names = "SELECT * FROM names ORDER BY name";
+                $results_names = $dbconnection -> query($sql_names);
+
+                if(!$results_names) {
+                    echo "SQL error: ". $dbconnection -> error;
+                    exit();
+                }
+
+                while($currentrow = $results_names -> fetch_assoc()) {
+                    echo "<option>" . $currentrow["name"] . "</option>";
+                }
+                ?>
+            </select>
+
+            <br><br>
+
+            <input type="submit" value="Log In">
+        </form>
+
+        <?php
+        exit();
+    }
+    ?>
 </div>
 </form>
+
+
+<?php include "Global Elements/footer.php"; ?>
+
 </body>
 </html>

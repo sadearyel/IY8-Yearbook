@@ -37,11 +37,15 @@ $mysql = new mysqli(
             padding-bottom: 100px;
             padding-left: calc(100% * (1 / 12));
             padding-right: calc(100% * (1 / 12));
+
+            text-align: center;
         }
         form {
             width: 60%;
             padding-left: 20%;
             padding-right: 20%;
+
+            text-align: left;
         }
         input[type=text], input[type=date], select {
             width: 100%;
@@ -76,6 +80,9 @@ $mysql = new mysqli(
 <?php include "Global Elements/nav.php"; ?>
 
 <div id="container">
+    <h1 class="section-title">
+        IMAGE UPLOAD FORM
+    </h1>
     <form action="imageupload.php" method="post" enctype="multipart/form-data">
 
         <label for="newimage">
