@@ -67,7 +67,8 @@ if($dbconnection -> errno) {
         echo "SQL ERROR! " . $dbconnection -> error;
     } else {
         echo "SUCCESS! Account added.";
-        header("refresh: 5; url=index.php");
+        echo "<br>";
+        echo "<a href='index.php'>Take me back home</a>";
     }
     ?>
 </div>
