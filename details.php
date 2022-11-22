@@ -18,7 +18,6 @@ if($dbconnection -> errno) {
     echo $dbconnection -> connect_error;
     exit();
 }
-
 ?>
 <html>
 <head>
@@ -68,10 +67,10 @@ if($dbconnection -> errno) {
         echo "ERROR: " . $dbconnection -> error;
     }
 
-    while($currentrow = $results->fetch_assoc()) {
-        echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 80%;'>";
+    while($currentrow = $results -> fetch_assoc()) {
+        echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 80%; margin: 20px;'>";
         echo "<p>";
-        echo "Photographer: " . "<a href='individudalpage.php?nameID=" . $currentrow["name_id"] . "'>" . $currentrow["name"] . "</a>";
+        echo "Photographer: " . "<a href='individualpage2.php?nameID=" . $currentrow["name_id"] . "'>" . $currentrow["name"] . "</a>";
         echo "<br>";
         echo "Event: " . $currentrow["event"];
         echo "<br>";

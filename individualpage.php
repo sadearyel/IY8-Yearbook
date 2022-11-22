@@ -4,12 +4,13 @@ $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
 $db = "icleung_yearbook";
 
-$mysql = new mysqli(
-    $host,
-    $userid,
-    $userpw,
-    $db
-);
+$dbconnection = new mysqli ($host, $userid, $userpw, $db);
+
+if($dbconnection -> errno) {
+    echo "DB CONNECTION ERROR!<br>";
+    echo $dbconnection -> connect_error;
+    exit();
+}
 ?>
 
 <html lang="en">
