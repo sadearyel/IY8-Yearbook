@@ -96,7 +96,7 @@ if($dbconnection -> errno) {
             LOGIN PAGE
         </h1>
         <p>
-            Please log in to access the entire site. New to the site? Create an account <a href="insertaccount.php">here</a>.
+            New to the site? Create an account <a href="signupform.php">here</a>.
             <br><br>
         </p>
         <form>
@@ -114,27 +114,6 @@ if($dbconnection -> errno) {
 
             <br><br>
 
-            <label for="name">
-                Choose Your Name:
-            </label>
-            <select name="name">
-                <?php
-                $sql_names = "SELECT * FROM names ORDER BY name";
-                $results_names = $dbconnection -> query($sql_names);
-
-                if(!$results_names) {
-                    echo "SQL error: ". $dbconnection -> error;
-                    exit();
-                }
-
-                while($currentrow = $results_names -> fetch_assoc()) {
-                    echo "<option>" . $currentrow["name"] . "</option>";
-                }
-                ?>
-            </select>
-
-            <br><br>
-
             <input type="submit" value="Log In">
         </form>
 
@@ -143,8 +122,6 @@ if($dbconnection -> errno) {
     }
     ?>
 </div>
-</form>
-
 
 <?php include "Global Elements/footer.php"; ?>
 

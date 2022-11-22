@@ -1,12 +1,9 @@
 <?php
-//form, want to be able to search by name (drop down), event (drop down), date (range - date), quote and images default
-
-
-//1. Connect to db
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
 $db = "icleung_yearbook";
+
 $dbconnection = new mysqli ($host, $userid, $userpw, $db);
 
 if($dbconnection -> errno) {
@@ -14,76 +11,127 @@ if($dbconnection -> errno) {
     echo $dbconnection -> connect_error;
     exit();
 }
-
-
 ?>
-<html>
+<html lang="en">
 <head>
-    <title>IY8 Yearbook Search!</title>
+    <title>IY8 Yearbook - Sign Up</title>
+    <link rel="shortcut icon" type="image/jpg" href="">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <link rel="stylesheet" href="main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #container {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-left: calc(100% * (1 / 12));
+            padding-right: calc(100% * (1 / 12));
+
+            text-align: center;
+        }
+        form {
+            width: 60%;
+            padding-left: 20%;
+            padding-right: 20%;
+
+            text-align: left;
+        }
+        input[type=text], input[type=date], select {
+            width: 100%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            width: 100%;
+            margin-top: 50px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<style>
-    body {
-        background-color: burlywood;
-        margin: 0 200px;
-        text-align: center;
-    }
-
-    #container {
-        padding: 30px;
-        margin-top: 100px;
-        background-color: olive;
-        width: 300px;
-        text-align: left;
-        color:white;
-    }
-
-    .label {
-        float:left;
-        clear:both;
-        width: 120px;
-    }
-    h1{
-        margin-bottom: -15px;
-    }
-</style>
-
 <body>
+
+<?php include "Global Elements/nav.php"; ?>
+
 <div id="container">
-    <div style="text-align: center"><h1>IY8 Yearbook: Create An Account</h1><br><em>please enter all information</em></div>
-    <hr>
+
+    <h1 class="section-title">
+        CREATE AN ACCOUNT
+    </h1>
 
     <form action="insertaccount.php">
+        <label for="username">
+            Username:
+        </label>
+        <input type="text" name="username">
 
-        Select Your Name: <select name="name">
+        <br><br>
 
+        <label for="password">
+            Password:
+        </label>
+        <input type="text" name="password">
+
+        <br><br>
+
+        <label for="email">
+            Email:
+        </label>
+        <input type="text" name="email">
+
+        <br><br>
+
+        <label for="name">
+            Select Your Name:
+        </label>
+        <select name="name">
             <?php
-            $sql = "SELECT *  FROM names ORDER BY name";
+            $sql_names = "SELECT * FROM names ORDER BY name";
+            $results_names = $dbconnection -> query($sql_names);
 
-            $results = $dbconnection -> query($sql);
-            if(!results){
-                echo "SQL ERROR!" . $dbconnection -> error;
-                echo "<hr>" . $sql . "<hr>";
+            if(!$results_names) {
+                echo "SQL error: ". $dbconnection -> error;
+                exit();
             }
-            while($currentrow = $results -> fetch_assoc()) {
-                echo "<option value='". $currentrow["name_id"]. "'>" . $currentrow["name"] . "</option>";
+
+            while($currentrow = $results_names -> fetch_assoc()) {
+                echo "<option value='". $currentrow["name_id"]. "'>"  . $currentrow["name"] . "</option>";
             }
             ?>
+        </select>
 
-        </select><br>
-        <br style="clear:both;">
+        <br><br>
 
-        <div class="label">Create Username:</div> <input type="text" name="username" placeholder="username">
-
-        <br style="clear:both;">
-
-
-        <div class="label">Create Password:</div>   <input type="text" name="password" placeholder="password">
-
-        <br style="clear:both;">
-        <br style="clear:both;">
-        <div style="text-align:center;"><input type="submit" value="Create Account!" style="background-color: darkolivegreen; color: white; border: 0"></div>
+        <input type="submit" value="Create Account">
+    </form>
 </div>
-</form>
+
+<?php include "Global Elements/footer.php"; ?>
+
 </body>
 </html>
 
