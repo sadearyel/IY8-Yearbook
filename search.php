@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // form, want to be able to search by name (drop down), event (drop down), date (range - date), quote and images default
 
 // connect to db

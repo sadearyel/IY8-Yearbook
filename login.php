@@ -95,11 +95,14 @@ if($dbconnection -> errno) {
         if($_REQUEST["password"] == $currentrow["password"]) {
             // valid login
             $_SESSION["loggedin"] = "yes";
+            $_SESSION["name_id"] = $currentrow["name_id"];
             $_SESSION["user_id"] = $currentrow["user_id"];
 
             echo "SUCCESSFUL LOGIN";
         } else { // invalid login
-            echo "ERROR. WRONG PASSWORD";
+            echo "ERROR. WRONG USERNAME OR PASSWORD";
+            echo "<br><br>";
+            echo "<a href='login.php'>Try Again</a>";
             exit();
         }
     } else { // not logged in and has not submitted login form

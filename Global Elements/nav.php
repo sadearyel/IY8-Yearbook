@@ -16,16 +16,16 @@ echo '<div id="nav">
         </h2>
     </div>
     <div style="text-align: right; flex-grow: 2;">
-        <h2>'
+        <h2>';
 
             if($_SESSION["loggedin"] == "yes") {
-                echo "<a href='logout.php'>LOGOUT</a>";
+                echo "<a href='profile.php'>PROFILE</a>";
             } else {
                 echo "<a href='login.php'>LOGIN</a>";
             }
 
 
-        </h2>
+echo'        </h2>
     </div>
 </div>';
 ?>

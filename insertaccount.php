@@ -54,13 +54,15 @@ if($dbconnection -> errno) {
 <div id="container">
 
     <?php
+    // set security level to non-admin level
     $sql = "INSERT INTO users
-            (username, password, email, name_id)
+            (username, password, email, name_id, security_lvl)
             VALUES 
             ('" . $_REQUEST["username"] . "',
             '" . $_REQUEST["password"] . "',
             '" . $_REQUEST["email"] . "',
-            " . $_REQUEST["name"] . ")";
+            " . $_REQUEST["name"] . ",
+            " . "1" . ")";
 
     $results = $dbconnection -> query($sql);
 

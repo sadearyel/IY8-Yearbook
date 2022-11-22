@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // redirect page visitors to the search page if the date field is empty
 if(empty($_REQUEST['date'])) {
     header('Location: search.php');
