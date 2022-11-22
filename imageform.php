@@ -22,7 +22,7 @@ $mysql = new mysqli(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
-    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,7 +73,7 @@ $mysql = new mysqli(
 </head>
 <body>
 
-<?php include "../Global Elements/nav.php"; ?>
+<?php include "Global Elements/nav.php"; ?>
 
 <div id="container">
     <form action="imageupload.php" method="post" enctype="multipart/form-data">
@@ -145,6 +145,6 @@ $mysql = new mysqli(
     </form>
 </div>
 
-<?php include "../Global Elements/footer.php"; ?>
+<?php include "Global Elements/footer.php"; ?>
 
 </body>
