@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // redirect page visitors to the home page if it was accessed in error
 if(empty($_REQUEST["nameID"])){
     header('Location: index.php');

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";

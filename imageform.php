@@ -1,4 +1,5 @@
 <!-- We'll use this page to add images to the images table in our db --!>
+session_start();
 
 <?php
 $host = "webdev.iyaclasses.com";

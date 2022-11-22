@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
@@ -11,7 +13,7 @@ $mysql = new mysqli(
     $db
 );
 
-// Dumping variables here to help with loooking for bugs
+// Dumping variables here to help with looking for bugs
 var_dump($_REQUEST);
 var_dump($_FILES);
 
@@ -34,7 +36,7 @@ $results = $mysql -> query($sql);
 
 // Testing for possible errors
 if(!$results) {
-    echo "SQL ERROR! " . $mysql->error;
+    echo "SQL ERROR! " . $mysql -> error;
 } else {
     echo "SUCCESS! Image added.";
 }

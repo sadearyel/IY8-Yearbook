@@ -9,7 +9,7 @@ $dbconnection = new mysqli ($host, $userid, $userpw, $db);
 
 if($dbconnection -> errno) {
     echo "DB CONNECTION ERROR!<br>";
-    echo $dbconnection->connect_error;
+    echo $dbconnection -> connect_error;
     exit();
 }
 ?>
@@ -82,14 +82,27 @@ if($dbconnection -> errno) {
 
     <?php
     session_start();
-    $_SESSION["loggedin"] == "";
 
-    if(!empty($_REQUEST["password"])) {
-        $sql = "SELECT * FROM users WHERE username = '" . $_REQUEST["username"] . "' AND password = '" . $_REQUEST["password"] . "'";
+    if($_SESSION["logedin"] == "yes") { // already logged in - reached this page in error
+        echo "ALREADY LOGGED IN";
+    } else if(!empty($_REQUEST["username"])) { // submitted login form
+        $sql = "SELECT * FROM users WHERE username = '" . $_REQUEST["username"] . "'";
 
-        echo $sql . "<br><br>";
-        exit();
-    } else if(empty($_SESSION["loggedin"])) {
+        $results = $dbconnection -> query($sql);
+        $currentrow = $results -> fetch_assoc();
+
+        // checking whether the inserted password matches the respective password in the database
+        if($_REQUEST["password"] == $currentrow["password"]) {
+            // valid login
+            $_SESSION["loggedin"] = "yes";
+            $_SESSION["user_id"] = $currentrow["user_id"];
+
+            echo "SUCCESSFUL LOGIN";
+        } else { // invalid login
+            echo "ERROR. WRONG PASSWORD";
+            exit();
+        }
+    } else { // not logged in and has not submitted login form
         ?>
 
         <h1 class="section-title">

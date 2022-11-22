@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // redirect page visitors to the sign up form / create an account page if ANY of the data fields are empty
 if(empty($_REQUEST["username"]) || empty($_REQUEST["password"]) || empty($_REQUEST["email"])) {
     header('Location: signupform.php');
@@ -66,9 +68,7 @@ if($dbconnection -> errno) {
     if(!$results) {
         echo "SQL ERROR! " . $dbconnection -> error;
     } else {
-        echo "SUCCESS! Account added.";
-        echo "<br>";
-        echo "<a href='index.php'>Take me back home</a>";
+        header("Location: login.php");
     }
     ?>
 </div>

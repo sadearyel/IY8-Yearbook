@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // redirect page visitors to the search page if it was accessed in error
 if(empty($_REQUEST["yearbookID"])){
     header('Location: search.php');
