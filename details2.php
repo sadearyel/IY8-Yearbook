@@ -69,7 +69,7 @@ if($dbconnection -> errno) {
 
     while($currentrow = $results->fetch_assoc()) {
         echo "<p>";
-        echo "Name: " . $currentrow["name"];
+        echo "Name: " . "<a href='individudalpage.php?nameID=" . $currentrow["name_id"] . "'>" . $currentrow["name"] . "</a>";
         echo "<br>";
         echo "Quote: " . $currentrow["quote"];
         echo "<br>";

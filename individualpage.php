@@ -14,7 +14,7 @@ $mysql = new mysqli(
 
 <html lang="en">
 <head>
-    <title>IY8 Yearbook</title>
+    <title>IY8 Yearbook - Profile Page</title>
     <link rel="shortcut icon" type="image/jpg" href="">
 
     <meta charset="UTF-8">
@@ -30,53 +30,28 @@ $mysql = new mysqli(
         body {
             font-family: 'Inter', sans-serif;
         }
-        #gallery {
-            padding-top: 100px;
-            padding-bottom: 100px;
-            padding-left: 0px;
-            padding-right: 0px;
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
         #gallery img {
             width: 10.001%;
             padding-bottom: 10px;
-        }
-        #intro {
-            padding-top: 125px;
-            padding-bottom: 125px;
-            padding-left: calc(100% * (4 / 12));
-            padding-right: calc(100% * (4 / 12));
-
-            text-align: center;
         }
         .individualpage {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
-
         }
         #individualimg {
-
             height: 15%;
             width: 15%;
             padding-top: 125px;
             padding-left: calc(100% * (5.35 / 12));
             padding-right: calc(100% * (5.35 / 12));
 
-
-
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-between;
-
         }
-
         #name {
             font-size: 40px;
             text-align: center;
@@ -111,8 +86,6 @@ $mysql = new mysqli(
             left: 80px;
             top: 91px;
 
-
-
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
@@ -121,7 +94,6 @@ $mysql = new mysqli(
             text-align: center;
 
             color: #000000;
-
         }
         .quotes{
             box-sizing: border-box;
@@ -129,7 +101,6 @@ $mysql = new mysqli(
             height: 42px;
             left: 200px;
             position: relative;
-
 
             display: flex;
             flex-direction: row;
@@ -145,15 +116,10 @@ $mysql = new mysqli(
             left: 260px;
             padding-top: 90px;
 
-
             background: #FFFFFF;
             border: 1.5px solid #000000;
             border-radius: 10px;
             flex: 1;
-
-
-
-
 
             font-family: 'Inter';
             font-style: normal;
@@ -177,7 +143,6 @@ $mysql = new mysqli(
             text-align: left;
 
             color: #000000;
-
         }
 
         .place{
@@ -191,7 +156,6 @@ $mysql = new mysqli(
             text-align: left;
 
             color: #000000;
-
         }
         .flex-child:first-child {
             margin-right: 500px;
@@ -203,8 +167,6 @@ $mysql = new mysqli(
             left: 80px;
             top: 91px;
 
-
-
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
@@ -213,7 +175,6 @@ $mysql = new mysqli(
             text-align: center;
 
             color: #000000;
-
 
         }
         .images{
@@ -224,15 +185,10 @@ $mysql = new mysqli(
             float:left;
             padding-top: 40px;
 
-
-
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
-
-
-
         }
 
         .flex-image {
@@ -243,15 +199,10 @@ $mysql = new mysqli(
             margin-right: 40px;
             position:relative;
 
-
             background: #FFFFFF;
             border: 1.5px solid #000000;
             border-radius: 10px;
             flex:1;
-
-
-
-
 
             font-family: 'Inter';
             font-style: normal;
@@ -275,7 +226,6 @@ $mysql = new mysqli(
             text-align: left;
 
             color: #000000;
-
         }
 
         .placeimage{
@@ -301,45 +251,12 @@ $mysql = new mysqli(
             margin-top: -40px;
 
         }
-
-        #cta {
-            padding-top: 125px;
-            padding-bottom: 125px;
-            padding-left: calc(100% * (1 / 12));
-            padding-right: calc(100% * (1 / 12));
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-<div id="nav">
-    <div style="text-align: left; flex-grow: 3;">
-        <h2>
-            LOS ANGELES, CALIFORNIA
-        </h2>
-    </div>
-    <div style="text-align: center; flex-grow: 4;">
-        <h2>
-            <a href="index.php">IOVINE AND YOUNG ACADEMY YEARBOOK</a>
-        </h2>
-    </div>
-    <div style="text-align: right; flex-grow: 2;">
-        <h2>
-            <a>LOGIN</a>
-        </h2>
-    </div>
-    <div style="text-align: right; flex-grow: 1;">
-        <h2>
-            <a href="search.php">SEARCH</a>
-        </h2>
-    </div>
-</div>
+
+<?php include "Global Elements/nav.php"; ?>
+
 <div class="individualpage">
     <img src="kate.png" alt="picture of kate" id="individualimg">
 
@@ -437,52 +354,6 @@ $mysql = new mysqli(
 
 
 
-
-
-
-
-
-
-
-
-        <div id="footer">
-            <div style="text-align: left; flex-grow: 5;">
-                <h2>
-                    THANKS FOR POPPING BY!
-                    <br><br>
-                    THIS SITE IS NOT ASSOCIATED WITH THE IOVINE AND YOUNG ACADEMY OR THE UNIVERSITY OF SOUTHERN CALIFORNIA.
-                </h2>
-            </div>
-            <div style="text-align: right; flex-grow: 5;">
-                <h2>
-                    <a>CONTACT FOUNDING TEAM</a>
-                </h2>
-            </div>
-        </div>
-
+        <?php include "Global Elements/footer.php"; ?>
 </body>
 </html>
-
-
-
-
-<!--   <div id="gallery
-    <?php /*
-    $sql = "SELECT * FROM images";
-    $results = $mysql -> query($sql);
-    $numrows = $results -> num_rows; // the total number of rows in the images table
-
-    // $numimages refers to the total number of images displayed in the gallery block: 27
-    for($numimages = 0; $numimages < 27; $numimages++) {
-
-        // rand(int min, int max) function allows us to randomly generate an existing row number from the images table
-        $randnum = rand(1, $numrows);
-
-        $sql_rand = "SELECT * FROM images WHERE image_id = " . $randnum;
-        $results_rand = $mysql -> query($sql_rand);
-
-        // we assign the row data to a $currentrow variable so that we can access specific columns, ex. image_link
-        $currentrow = $results_rand -> fetch_assoc();
-        echo "<img src = 'Image Uploads/" . $currentrow["image_name"] . "'>";
-    } */
-?>
