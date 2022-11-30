@@ -85,6 +85,8 @@ if($dbconnection -> errno) {
     $results = $dbconnection -> query($sql);
     $currentrow = $results -> fetch_assoc();
 
+    echo "<img src='Image Uploads/" . $currentrow["pfp"] . "' style='width: 30%; margin-bottom: 20px;'>";
+
     echo "<h1 class='section-title'>";
     echo "WELCOME<br>";
     echo $currentrow["name"];

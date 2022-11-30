@@ -90,7 +90,7 @@ if($dbconnection -> errno) {
     }
 
     while($currentrow = $results -> fetch_assoc()) {
-        // echo "<img src='" . "' style='width: 30%; margin: 20px;'>";
+        echo "<img src='Image Uploads/" . $currentrow["pfp"] . "' style='width: 30%; margin-bottom: 20px;'>";
         echo "<h1 class='section-title'>";
         echo $currentrow["name"];
         echo "</h1>";
