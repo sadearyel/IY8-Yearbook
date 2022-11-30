@@ -97,6 +97,7 @@ if($dbconnection -> errno) {
             $_SESSION["loggedin"] = "yes";
             $_SESSION["name_id"] = $currentrow["name_id"];
             $_SESSION["user_id"] = $currentrow["user_id"];
+            $_SESSION["security_lvl"] = $currentrow["security_lvl"];
 
             echo "SUCCESSFUL LOGIN";
         } else { // invalid login

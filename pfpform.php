@@ -3,6 +3,13 @@
 <?php
 session_start();
 
+// This page requires users to be logged in
+// Redirect page visitors to the login page if it was accessed in error
+if(empty($_SESSION["user_id"])){
+    header('Location: login.php');
+    exit();
+}
+
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
@@ -102,7 +109,18 @@ $mysql = new mysqli(
             $sql = "SELECT * FROM names";
             $results = $mysql -> query($sql);
 
-            while($currentrow = $results -> fetch_assoc()) {
+            if($_SESSION["security_lvl"] == 0) {
+                // If the user has admin status, they are able to change the pfp of any user
+                while($currentrow = $results -> fetch_assoc()) {
+                    echo "<option value='" . $currentrow['name_id'] . "'>" . $currentrow['name'] . "</option>";
+                }
+            } else {
+                // If the user does not have admin status, they are only able to change the pfp of themselves
+                $sql_user = "SELECT * FROM names WHERE name_id = " . $_SESSION["name_id"];
+
+                $results_user = $mysql -> query($sql_user);
+                $currentrow = $results_user -> fetch_assoc();
+
                 echo "<option value='" . $currentrow['name_id'] . "'>" . $currentrow['name'] . "</option>";
             }
             ?>
