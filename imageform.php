@@ -1,7 +1,8 @@
 <!-- We'll use this page to add images to the images table in our db --!>
-session_start();
 
 <?php
+session_start();
+
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";

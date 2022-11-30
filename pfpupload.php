@@ -17,19 +17,14 @@ $mysql = new mysqli(
 var_dump($_REQUEST);
 var_dump($_FILES);
 
-// First, move the newly uploaded image to the appropriate Image Uploads folder
+// First, move the newly uploaded image to the appropriate Image Uploads folder (same folder as regular image uploads, which is okay)
 $filepath = $_SERVER["CONTEXT_DOCUMENT_ROOT"] . "/acad276/IY8-Yearbook/Image Uploads/";
 move_uploaded_file($_FILES["newimage"]["tmp_name"], $filepath . $_FILES["newimage"]["name"]);
 
-// Then, add the new image to the Images table with all the necessary info
-$sql = "INSERT INTO images
-        (image_type_id, name_id, image_name, date, event_id)
-        VALUES
-        (" . $_REQUEST["image-type"] . ",
-        " . $_REQUEST["photographer"] . ",
-        '" . $_FILES["newimage"]["name"] . "',
-        '" . $_REQUEST["date"] . "',
-        " . $_REQUEST["event"] . ")";
+// Then, update the current pfp image attached to the individual's name
+$sql = "UPDATE names SET " .
+        "pfp = '" . $_FILES["newimage"]["name"] . "'" .
+        " WHERE name_id = " . $_REQUEST["name"];
 
 $results = $mysql -> query($sql);
 
