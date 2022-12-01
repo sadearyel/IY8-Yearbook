@@ -126,7 +126,7 @@ $mysql = new mysqli(
         <label for="quote">
             Quote:
         </label>
-        <input type="text" name="quote" value="<?php echo $currentrow['quote_id']; ?>">
+        <input type="text" name="quote" value="<?php echo $currentrow['quote']; ?>">
 
         <br><br>
 
