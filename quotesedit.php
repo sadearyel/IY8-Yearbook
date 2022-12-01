@@ -126,19 +126,7 @@ $mysql = new mysqli(
         <label for="quote">
             Quote:
         </label>
-        <select name="quote">
-            <?php
-            $sql_options = "SELECT * FROM quotes";
-            $results_options = $mysql -> query($sql_options);
-
-            echo "<option value='" . $currentrow['quote_id'] . "'>" . $currentrow['quote'] . "</option>";
-            echo "<option>-----</option>";
-
-            while($currentrow_options = $results_options -> fetch_assoc()) {
-                echo "<option value='" . $currentrow_options['quote_id'] . "'>" . $currentrow_options['quote'] . "</option>";
-            }
-            ?>
-        </select>
+        <input type="text" name="quote" value="<?php echo $currentrow['quote_id']; ?>">
 
         <br><br>
 
