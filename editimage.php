@@ -141,7 +141,7 @@ $mysql = new mysqli(
 
         while($currentrow_tag = $results_tag -> fetch_assoc()) {
 
-            $sql_name = "SELECT * FROM names WHERE name_id =" . $_REQUEST['name_id'];
+            $sql_name = "SELECT * FROM names WHERE name_id =" . $currentrow_tag['name_id'];
             $results_name = $mysql -> query($sql_name);
             $currentrow_name = $results_name -> fetch_assoc();
 

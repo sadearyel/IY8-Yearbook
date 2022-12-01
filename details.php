@@ -73,8 +73,37 @@ if($dbconnection -> errno) {
     echo "Event: " . $currentrow["event"];
     echo "<br>";
     echo "Date: " . $currentrow["date"];
-    echo "</p>";
 
+    // Tagged members + redirection hyperlinks to their individual page
+    echo "<br><br>";
+    echo "Tagged People:";
+    echo "<br>";
+
+    $sql_tag = "SELECT * FROM images_x_names WHERE image_id =" . $_REQUEST["yearbookID"];
+    $results_tag = $dbconnection -> query($sql_tag);
+
+    while($currentrow_tag = $results_tag -> fetch_assoc()) {
+
+        $sql_name = "SELECT * FROM names WHERE name_id =" . $currentrow_tag['name_id'];
+        $results_name = $dbconnection -> query($sql_name);
+        $currentrow_name = $results_name -> fetch_assoc();
+
+        echo "<a href='individualpage2.php?nameID=" . $currentrow_tag['name_id'] . "'>";
+        echo $currentrow_name['name'];
+        echo "</a>";
+        echo "<br>";
+    }
+
+    // If the user is the photographer of the image, provide them with image editing tools
+    if($_SESSION['name_id'] == $currentrow["name_id"]) {
+        echo "<br><br>";
+        echo "<a href='editimage.php?imageid=" . $_REQUEST['yearbookID'] . "'>";
+        echo "Edit Image Details";
+        echo "</a>";
+    }
+
+
+    echo "</p>";
     ?>
 
 </div>

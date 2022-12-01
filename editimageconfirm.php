@@ -37,13 +37,12 @@ $sql_tag = "SELECT * FROM names";
 $results_tag = $mysql -> query($sql_tag);
 
 // Run through all of the checkbox names and see if they were checked, if they were, add to the associative table
-while($currentrow = $results_tag -> fetch_assoc()) {
-    if(isset($_GET['checkbox'])) {
-        $sql_check = "INSERT INTO images_x_names
-                        (image_id, name_id)
-                        VALUES 
-                        (" . $_REQUEST['id'] . ",
-                        " . $currentrow['name_id'] . ")";
+while($currentrow_tag = $results_tag -> fetch_assoc()) {
+    $checkbox_name = "'" . $currentrow_tag['name'] . "'";
+    $checkbox_name_id = "'" . $currentrow_tag['name_id'] . "'";
+
+    if(isset($_POST[$checkbox_name]) && $_POST[$checkbox_name] == $checkbox_name_id) {
+        echo "Works";
 
         $results_check = $mysql -> query($sql_check);
     }
@@ -125,7 +124,11 @@ while($currentrow = $results_tag -> fetch_assoc()) {
         echo "<p>";
         echo "Your image has been successfully updated.";
         echo "<br><br>";
-        echo "<a href = 'profile.php'>";
+        echo "<a href='details.php?yearbookID=" . $_REQUEST['id'] . "'>";
+        echo "Return to Image Detail page";
+        echo "</a>";
+        echo "<br>";
+        echo "<a href='profile.php'>";
         echo "Return to Profile page.";
         echo "</a>";
         echo "</p>";
