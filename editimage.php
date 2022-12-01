@@ -113,28 +113,91 @@ $mysql = new mysqli(
             ?>
         </select>
 
+        <br><br>
+
+        <label for="photographer">
+            Photographer:
+        </label>
+        <select name="photographer">
+            <?php
+            $sql_options = "SELECT * FROM names";
+            $results_options = $mysql -> query($sql_options);
+
+            echo "<option value='" . $currentrow['name_id'] . "'>" . $currentrow['name'] . "</option>";
+            echo "<option>-----</option>";
+
+            while($currentrow_options = $results_options -> fetch_assoc()) {
+                echo "<option value='" . $currentrow_options['name_id'] . "'>" . $currentrow_options['name'] . "</option>";
+            }
+            ?>
+        </select>
+
+        <br><br>
+
+        <p>Currently Tagged People in this Image:</p>
+        <?php
+        $sql_tag = "SELECT * FROM images_x_names WHERE image_id =" . $_REQUEST["imageid"];
+        $results_tag = $mysql -> query($sql_tag);
+
+        while($currentrow_tag = $results_tag -> fetch_assoc()) {
+
+            $sql_name = "SELECT * FROM names WHERE name_id =" . $_REQUEST['name_id'];
+            $results_name = $mysql -> query($sql_name);
+            $currentrow_name = $results_name -> fetch_assoc();
+
+            echo $currentrow_name['name'];
+        }
+        ?>
+
+        <br><br>
+
+        <p>Tag New People in this Image:</p>
+        <?php
+        $sql_tag = "SELECT * FROM names";
+        $results_tag = $mysql -> query($sql_tag);
+
+        while($currentrow_tag = $results_tag -> fetch_assoc()) {
+            echo "<input type='checkbox' id='" . $currentrow_tag['name']  . "' name='" . $currentrow_tag['name'] . "' value='" . $currentrow_tag['name_id'] . "'>";
+            echo "<label for='" . $currentrow_tag['name'] . "'>";
+            echo "&nbsp;" . $currentrow_tag['name'];
+            echo "</label>";
+            echo "<br>";
+        }
+        ?>
+
+        <br><br>
+
+        <label for="date">
+            Date:
+        </label>
+        <input type="date" name="date" value="<?php echo $currentrow['date']; ?>">
+
+        <br><br>
+
+        <label for="event">
+            Event:
+        </label>
+        <select name="event">
+            <?php
+            $sql_options = "SELECT * FROM events";
+            $results_options = $mysql -> query($sql_options);
+
+            echo "<option value='" . $currentrow['event_id'] . "'>" . $currentrow['event'] . "</option>";
+            echo "<option>-----</option>";
+
+            while($currentrow_options = $results_options -> fetch_assoc()) {
+                echo "<option value='" . $currentrow_options['event_id'] . "'>" . $currentrow_options['event'] . "</option>";
+            }
+            ?>
+        </select>
+
+        <br><br>
+
+        <input type="submit" value="Update">
     </form>
 </div>
 
+<?php include "Global Elements/footer.php"; ?>
 
 </body>
-
-
 </html>
-
-<?php
-// Adding tagged individuals
-$sql_names = "SELECT * FROM names";
-$results_names = $mysql -> query($sql_names);
-
-// Run through all of the checkbox names and see if they were checked, if they were, add to the associative table
-while($currentrow = $results_names -> fetch_assoc()) {
-    if(isset($_GET['checkbox'])) {
-        $sql_check = "INSERT INTO images_x_names
-                        (image_id, name_id)
-                        VALUES 
-                        ($currentrow[''])
-                        ";
-    }
-}
-?>

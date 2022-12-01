@@ -126,30 +126,12 @@ $mysql = new mysqli(
 
         <br><br>
 
-        <p>Tag People in the Image:</p>
-        <?php
-        $sql_tag = "SELECT * FROM names";
-        $results_tag = $mysql -> query($sql_tag);
-
-        while($currentrow = $results_tag -> fetch_assoc()) {
-            echo "<input type='checkbox' id='" . $currentrow['name']  . "' name='" . $currentrow['name'] . "' value='" . $currentrow['name_id'] . "'>";
-            echo "<label for='" . $currentrow['name'] . "'>";
-            echo "&nbsp;" . $currentrow['name'];
-            echo "</label>";
-            echo "<br>";
-        }
-
-        ?>
-
-        <br><br>
-
         <label for="date">
             Date:
         </label>
         <input type="date" name="date">
 
         <br><br>
-
 
         <label for="event">
             Event:

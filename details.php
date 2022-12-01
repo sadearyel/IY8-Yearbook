@@ -63,24 +63,17 @@ if($dbconnection -> errno) {
     <?php
 
     $sql = "SELECT * from imagesView WHERE image_id = " . $_REQUEST["yearbookID"];
-
     $results = $dbconnection -> query($sql);
+    $currentrow = $results -> fetch_assoc();
 
-    // checking for errors
-    if(!results) {
-        echo "ERROR: " . $dbconnection -> error;
-    }
-
-    while($currentrow = $results -> fetch_assoc()) {
-        echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 80%; margin: 20px;'>";
-        echo "<p>";
-        echo "Photographer: " . "<a href='individualpage2.php?nameID=" . $currentrow["name_id"] . "'>" . $currentrow["name"] . "</a>";
-        echo "<br>";
-        echo "Event: " . $currentrow["event"];
-        echo "<br>";
-        echo "Date: " . $currentrow["date"];
-        echo "</p>";
-    }
+    echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 80%; margin: 20px;'>";
+    echo "<p>";
+    echo "Photographer: " . "<a href='individualpage2.php?nameID=" . $currentrow["name_id"] . "'>" . $currentrow["name"] . "</a>";
+    echo "<br>";
+    echo "Event: " . $currentrow["event"];
+    echo "<br>";
+    echo "Date: " . $currentrow["date"];
+    echo "</p>";
 
     ?>
 
