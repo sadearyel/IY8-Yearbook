@@ -38,5 +38,8 @@ if(!$results) {
     echo "SQL ERROR! " . $mysql -> error;
 } else {
     echo "SUCCESS! Image added.";
+    echo "Add tagged individuals by accessing your uploaded images on your profile.";
 }
 ?>
+
+

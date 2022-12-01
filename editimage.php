@@ -76,6 +76,7 @@ $mysql = new mysqli(
             cursor: pointer;
         }
     </style>
+
 </head>
 <body>
 
@@ -83,94 +84,57 @@ $mysql = new mysqli(
 
 <div id="container">
     <h1 class="section-title">
-        IMAGE UPLOAD FORM
+        IMAGE EDIT FORM
     </h1>
-    <form action="imageupload.php" method="post" enctype="multipart/form-data">
 
-        <label for="newimage">
-            Image File:
-        </label>
-        <input type="file" name="newimage">
+    <?php
+    $sql = "SELECT * FROM imagesView WHERE image_id =" . $_REQUEST["imageid"];
+    $results = $mysql -> query($sql);
+    $currentrow = $results -> fetch_assoc();
 
-        <br><br>
+    echo "<img src='Image Uploads/" . $currentrow["image_name"] . "' style='width: 50%; margin-bottom: 50px;'>";
+    ?>
 
+    <form action="editimageconfirm.php" method="post" enctype="multipart/form-data">
         <label for="image-type">
             Image Type:
         </label>
         <select name="image-type">
             <?php
-            $sql = "SELECT * FROM image_types";
-            $results = $mysql -> query($sql);
+            $sql_options = "SELECT * FROM image_types";
+            $results_options = $mysql -> query($sql_options);
 
-            while($currentrow = $results -> fetch_assoc()) {
-                echo "<option value='" . $currentrow['image_type_id'] . "'>" . $currentrow['image_type'] . "</option>";
+            echo "<option value='" . $currentrow['image_type_id'] . "'>" . $currentrow['image_type'] . "</option>";
+            echo "<option>-----</option>";
+
+            while($currentrow_options = $results_options -> fetch_assoc()) {
+                echo "<option value='" . $currentrow_options['image_type_id'] . "'>" . $currentrow_options['image_type'] . "</option>";
             }
             ?>
         </select>
 
-        <br><br>
-
-        <label for="photographer">
-            Photographer:
-        </label>
-        <select name="photographer">
-            <?php
-            $sql = "SELECT * FROM names";
-            $results = $mysql -> query($sql);
-
-            while($currentrow = $results -> fetch_assoc()) {
-                echo "<option value='" . $currentrow['name_id'] . "'>" . $currentrow['name'] . "</option>";
-            }
-            ?>
-        </select>
-
-        <br><br>
-
-        <p>Tag People in the Image:</p>
-        <?php
-        $sql_tag = "SELECT * FROM names";
-        $results_tag = $mysql -> query($sql_tag);
-
-        while($currentrow = $results_tag -> fetch_assoc()) {
-            echo "<input type='checkbox' id='" . $currentrow['name']  . "' name='" . $currentrow['name'] . "' value='" . $currentrow['name_id'] . "'>";
-            echo "<label for='" . $currentrow['name'] . "'>";
-            echo "&nbsp;" . $currentrow['name'];
-            echo "</label>";
-            echo "<br>";
-        }
-
-        ?>
-
-        <br><br>
-
-        <label for="date">
-            Date:
-        </label>
-        <input type="date" name="date">
-
-        <br><br>
-
-
-        <label for="event">
-            Event:
-        </label>
-        <select name="event">
-            <?php
-            $sql = "SELECT * FROM events";
-            $results = $mysql -> query($sql);
-
-            while($currentrow = $results -> fetch_assoc()) {
-                echo "<option value='" . $currentrow['event_id'] . "'>" . $currentrow['event'] . "</option>";
-            }
-            ?>
-        </select>
-
-        <br><br>
-
-        <input type="submit">
     </form>
 </div>
 
-<?php include "Global Elements/footer.php"; ?>
 
 </body>
+
+
+</html>
+
+<?php
+// Adding tagged individuals
+$sql_names = "SELECT * FROM names";
+$results_names = $mysql -> query($sql_names);
+
+// Run through all of the checkbox names and see if they were checked, if they were, add to the associative table
+while($currentrow = $results_names -> fetch_assoc()) {
+    if(isset($_GET['checkbox'])) {
+        $sql_check = "INSERT INTO images_x_names
+                        (image_id, name_id)
+                        VALUES 
+                        ($currentrow[''])
+                        ";
+    }
+}
+?>

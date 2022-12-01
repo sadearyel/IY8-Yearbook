@@ -1,3 +1,5 @@
+<!-- Image details page --!>
+
 <?php
 session_start();
 
