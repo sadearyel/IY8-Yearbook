@@ -3,13 +3,6 @@
 <?php
 session_start();
 
-// This page requires users to be logged in
-// Redirect page visitors to the login page if it was accessed in error
-if(empty($_SESSION["user_id"])){
-    header('Location: login.php');
-    exit();
-}
-
 $host = "webdev.iyaclasses.com";
 $userid = "icleung";
 $userpw = "AcadDev_Leung_7912600781";
@@ -106,6 +99,13 @@ $mysql = new mysqli(
         </label>
         <select name="name">
             <?php
+            // This page requires users to be logged in
+            // Redirect page visitors to the login page if it was accessed in error
+            if(empty($_SESSION["user_id"])){
+                echo "<p>Please login to access this page.</p>";
+                exit();
+            }
+
             $sql = "SELECT * FROM names";
             $results = $mysql -> query($sql);
 

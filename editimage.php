@@ -145,7 +145,7 @@ $mysql = new mysqli(
             $results_name = $mysql -> query($sql_name);
             $currentrow_name = $results_name -> fetch_assoc();
 
-            echo $currentrow_name['name'];
+            echo $currentrow_name['name'] . "<br>";
         }
         ?>
 
@@ -192,6 +192,9 @@ $mysql = new mysqli(
         </select>
 
         <br><br>
+
+        <!-- Pass along image id information to the update/confirmation page --!>
+        <input type="hidden" name="id" value="<?php echo $_REQUEST["imageid"];?>">
 
         <input type="submit" value="Update">
     </form>

@@ -23,8 +23,8 @@ move_uploaded_file($_FILES["newimage"]["tmp_name"], $filepath . $_FILES["newimag
 
 // Then, update the current pfp image attached to the individual's name
 $sql = "UPDATE names SET " .
-        "pfp = '" . $_FILES["newimage"]["name"] . "'" .
-        " WHERE name_id = " . $_REQUEST["name"];
+        "pfp = '" . $_FILES["newimage"]["name"] . "' " .
+        "WHERE name_id = " . $_REQUEST["name"];
 
 $results = $mysql -> query($sql);
 

@@ -18,7 +18,7 @@ $mysql = new mysqli(
 
 <html lang="en">
 <head>
-    <title>Administrator Only - Image Form Page</title>
+    <title>IY8 Yearbook - Upload Image Page</title>
     <link rel="shortcut icon" type="image/jpg" href="">
 
     <meta charset="UTF-8">
