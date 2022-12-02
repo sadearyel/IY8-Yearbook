@@ -157,8 +157,9 @@ $mysql = new mysqli(
         $results_tag = $mysql -> query($sql_tag);
 
         while($currentrow_tag = $results_tag -> fetch_assoc()) {
-            echo "<input type='checkbox' id='" . $currentrow_tag['name']  . "' name='" . $currentrow_tag['name'] . "' value='" . $currentrow_tag['name_id'] . "'>";
-            echo "<label for='" . $currentrow_tag['name'] . "'>";
+            // Each checkbox will be named user## (## representing name id) ex. "user20"
+            echo "<input type='checkbox' id='user" . $currentrow_tag['name_id']  . "' name='user" . $currentrow_tag['name_id'] . "' value='" . $currentrow_tag['name_id'] . "'>";
+            echo "<label for='user" . $currentrow_tag['name_id'] . "'>";
             echo "&nbsp;" . $currentrow_tag['name'];
             echo "</label>";
             echo "<br>";
@@ -170,7 +171,7 @@ $mysql = new mysqli(
         <label for="date">
             Date:
         </label>
-        <input type="date" name="date" value="<?php echo $currentrow['date']; ?>">
+        <input type="date" name="date" value="<?php echo $currentrow['date'];?>">
 
         <br><br>
 
@@ -194,7 +195,7 @@ $mysql = new mysqli(
         <br><br>
 
         <!-- Pass along image id information to the update/confirmation page --!>
-        <input type="hidden" name="id" value="<?php echo $_REQUEST["imageid"];?>">
+        <input type="hidden" name="id" value="<?php echo $currentrow['image_id'];?>">
 
         <input type="submit" value="Update">
     </form>

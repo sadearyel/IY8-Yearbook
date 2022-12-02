@@ -38,11 +38,13 @@ $results_tag = $mysql -> query($sql_tag);
 
 // Run through all of the checkbox names and see if they were checked, if they were, add to the associative table
 while($currentrow_tag = $results_tag -> fetch_assoc()) {
-    $checkbox_name = "'" . $currentrow_tag['name'] . "'";
-    $checkbox_name_id = "'" . $currentrow_tag['name_id'] . "'";
 
-    if(isset($_POST[$checkbox_name]) && $_POST[$checkbox_name] == $checkbox_name_id) {
-        echo "Works";
+    if(!empty($_REQUEST["user" . $currentrow_tag['name_id']])) {
+        $sql_check = "INSERT INTO images_x_names
+                (image_id, name_id)
+                VALUES 
+                (" . $_REQUEST['id'] . ",
+                " . $currentrow_tag['name_id'] . ")";
 
         $results_check = $mysql -> query($sql_check);
     }

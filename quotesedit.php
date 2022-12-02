@@ -91,7 +91,6 @@ $mysql = new mysqli(
     $sql = "SELECT * FROM quotesView WHERE quote_id =" . $_REQUEST["quote_id"];
     $results = $mysql -> query($sql);
     $currentrow = $results -> fetch_assoc();
-
     ?>
 
     <form action="editquoteconfirm.php" method="post" enctype="multipart/form-data">
@@ -126,12 +125,12 @@ $mysql = new mysqli(
         <label for="quote">
             Quote:
         </label>
-        <input type="text" name="quote" value="<?php echo $currentrow['quote']; ?>">
+        <input type="text" name="quote" value='<?php echo $currentrow['quote'];?>'>
 
         <br><br>
 
         <!-- Pass along image id information to the update/confirmation page --!>
-        <input type="hidden" name="quote_id" value="<?php echo $_REQUEST["quote_id"];?>">
+        <input type="hidden" name="quote_id" value="<?php echo $_REQUEST['quote_id'];?>">
 
         <input type="submit" value="Update">
     </form>
