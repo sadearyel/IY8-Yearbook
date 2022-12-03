@@ -8,7 +8,9 @@ body {
 
 /* Styleguide */
 h1 {
-    font-size: 16px;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
 }
 h2 {
     font-size: 14px;

@@ -7,7 +7,7 @@ echo '<div id="nav">
     </div>
     <div style="text-align: center; flex-grow: 4;">
         <h2>
-            <a href="index.php">IOVINE AND YOUNG ACADEMY YEARBOOK</a>
+            <a href="index.php"><strong>IOVINE AND YOUNG ACADEMY YEARBOOK</strong></a>
         </h2>
     </div>
     <div style="text-align: right; flex-grow: 1;">
