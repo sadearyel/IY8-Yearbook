@@ -87,6 +87,12 @@ $mysql = new mysqli(
     </h1>
     <form action="quoteupload.php" method="post" enctype="multipart/form-data">
 
+        <p>
+            Please keep in mind that you will not have quote editing access unless you are the specified speaker of the quote.
+        </p>
+
+        <br><br>
+
         <label for="name">
             Name:
         </label>

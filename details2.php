@@ -77,6 +77,14 @@ if($dbconnection -> errno) {
         echo "<br>";
         echo "Date: " . $currentrow["date"];
         echo "</p>";
+
+        // If the user is the speaker of the quote, provide them with quote editing tools
+        if($_SESSION['name_id'] == $currentrow["name_id"]) {
+            echo "<br><br>";
+            echo "<a href='quotesedit.php?quote_id=" . $_REQUEST['yearbookID'] . "'>";
+            echo "Edit Quote Details";
+            echo "</a>";
+        }
     }
 
     ?>

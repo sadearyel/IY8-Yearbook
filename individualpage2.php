@@ -47,7 +47,7 @@ if($dbconnection -> errno) {
 
             text-align: center;
         }
-        #quotes, #images {
+        #quotes, .images {
             width: 100%;
             margin-top: 50px;
 
@@ -85,7 +85,7 @@ if($dbconnection -> errno) {
     $results = $dbconnection -> query($sql);
 
     // checking for errors
-    if(!results) {
+    if(!$results) {
         echo "ERROR: " . $dbconnection -> error;
     }
 
@@ -106,15 +106,15 @@ if($dbconnection -> errno) {
     echo "<div id='quotes'>";
 
     $sql_quotes = "SELECT * FROM quotes WHERE name_id = " . $_REQUEST["nameID"];
-
     $results_quotes = $dbconnection -> query($sql_quotes);
 
     // checking for errors
-    if(!results_quotes) {
+    if(!$results_quotes) {
         echo "ERROR: " . $dbconnection -> error;
     }
 
     while($currentrow = $results_quotes -> fetch_assoc()) {
+        echo "<a href='details2.php?yearbookID=" . $currentrow['quote_id'] . "'>";
         echo "<div class='card'>";
         echo "<p>";
         echo "'" . $currentrow["quote"] . "'";
@@ -122,30 +122,61 @@ if($dbconnection -> errno) {
         echo $currentrow["date"];
         echo "</p>";
         echo "</div>";
+        echo "</a>";
     }
 
     echo "</div>";
 
     echo "<br><br>";
 
-    // image cards
-    echo "<h2>IMAGES</h2>";
-    echo "<div id='images'>";
+    // tagged image cards
+    echo "<h2>TAGGED IMAGES</h2>";
+    echo "<div class='images'>";
 
-    // change this to tagged images later
+    $sql_tag = "SELECT * FROM images_x_names WHERE name_id = " . $_REQUEST["nameID"];
+    $results_tag = $dbconnection -> query($sql_tag);
+
+    // checking for errors
+    if(!$results_tag) {
+        echo "ERROR: " . $dbconnection -> error;
+    }
+
+    // go through all tagged images in the associative table, refer to the images table to retrieve the name of the image
+    while($currentrow = $results_tag -> fetch_assoc()) {
+        $sql_imageref = "SELECT * FROM images WHERE image_id = " . $currentrow["image_id"];
+        $results_imageref = $dbconnection -> query($sql_imageref);
+        $currentrow_imageref = $results_imageref -> fetch_assoc();
+
+        echo "<a href='details.php?yearbookID=" . $currentrow_imageref['image_id'] . "'>";
+        echo "<div class='card'>";
+        echo "<img src='Image Uploads/" . $currentrow_imageref['image_name'] . "' style='width: 100%;'>";
+        echo "</div>";
+        echo "</a>";
+    }
+
+
+    echo "</div>";
+
+    echo "<br><br>";
+
+    // photographed image cards
+    echo "<h2>PHOTOGRAPHED IMAGES</h2>";
+    echo "<div class='images'>";
+
     $sql_images = "SELECT * FROM images WHERE name_id = " . $_REQUEST["nameID"];
-
     $results_images = $dbconnection -> query($sql_images);
 
     // checking for errors
-    if(!results_images) {
+    if(!$results_images) {
         echo "ERROR: " . $dbconnection -> error;
     }
 
     while($currentrow = $results_images -> fetch_assoc()) {
+        echo "<a href='details.php?yearbookID=" . $currentrow['image_id'] . "'>";
         echo "<div class='card'>";
         echo "<img src='Image Uploads/" . $currentrow['image_name'] . "' style='width: 100%;'>";
         echo "</div>";
+        echo "</a>";
     }
 
     echo "</div>";

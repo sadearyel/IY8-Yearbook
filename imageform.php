@@ -87,6 +87,12 @@ $mysql = new mysqli(
     </h1>
     <form action="imageupload.php" method="post" enctype="multipart/form-data">
 
+        <p>
+            Please keep in mind that you will not have image editing access unless you are the photographer of the image.
+        </p>
+
+        <br><br>
+
         <label for="newimage">
             Image File:
         </label>

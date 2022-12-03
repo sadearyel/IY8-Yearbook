@@ -70,6 +70,28 @@ if($dbconnection -> errno) {
 
             text-align: center;
         }
+        #quotes, .images {
+             width: 100%;
+             margin-top: 50px;
+
+             display: flex;
+             flex-direction: row;
+             flex-wrap: wrap;
+             justify-content: space-between;
+         }
+        .card {
+            width: 200px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            border: 1px solid black;
+            border-radius: 5px;
+
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -99,8 +121,6 @@ if($dbconnection -> errno) {
     echo '</div>';
     echo '</a>';
 
-    // users do not yet have the ability to edit their previous quote and image submissions - still needs to be built
-
     echo "<br><br>";
 
     echo "<p>";
@@ -108,14 +128,16 @@ if($dbconnection -> errno) {
     $sql_user = "SELECT * FROM users WHERE user_id = " . $_SESSION["user_id"];
 
     $results_user = $dbconnection -> query($sql_user);
-    $currentrow = $results_user -> fetch_assoc();
+    $currentrow_user = $results_user -> fetch_assoc();
 
-    if($currentrow["security_lvl"] == 0) { // admin status
+    if($currentrow_user["security_lvl"] == 0) { // admin status
         ?>
 
         <hr>
         <br>
-        Admin Access Pages
+        <h2>
+            ADMIN ACCESS PAGES
+        </h2>
         <br><br>
         <div class="section">
             <div class="button">
@@ -135,27 +157,86 @@ if($dbconnection -> errno) {
         <?php
     }
 
-    if($currentrow["security_lvl"] <= 1) { // regular access
+    if($currentrow_user["security_lvl"] <= 1) { // cohort 8 status
         ?>
+
         <hr>
         <br>
-        Cohort 8 Member Pages
+        <h2>
+            COHORT 8 ACCESS PAGES
+        </h2>
         <br><br>
         <div class="section">
-            <div class="button">
-                Edit Personal Images
-            </div>
-            <div class="button">
-                Edit Personal Quotes
-            </div>
+            <a href="imageform.php">
+                <div class="button">
+                    Add Image
+                </div>
+            </a>
+            <a href="quotesform.php">
+                <div class="button">
+                    Add Quote
+                </div>
+            </a>
         </div>
         <br>
         <hr>
 
+        <br><br>
         <?php
     }
 
     echo "</p>";
+
+    // show all quotes that are attributed to this user
+    echo "<h2>QUOTES</h2>";
+    echo"<div id='quotes'>";
+
+    $sql_quotes = "SELECT * FROM quotes WHERE name_id = " . $_SESSION["name_id"];
+    $results_quotes = $dbconnection -> query($sql_quotes);
+
+    // checking for errors
+    if(!$results_quotes) {
+        echo "ERROR: " . $dbconnection -> error;
+    }
+
+    while($currentrow_quotes = $results_quotes -> fetch_assoc()) {
+        echo "<a href='details2.php?yearbookID=" . $currentrow_quotes['quote_id'] . "'>";
+        echo "<div class='card'>";
+        echo "<p>";
+        echo "'" . $currentrow_quotes["quote"] . "'";
+        echo "<br>";
+        echo $currentrow_quotes["date"];
+        echo "</p>";
+        echo "</div>";
+        echo "</a>";
+    }
+
+    echo "</div>";
+
+    echo "<br><br>";
+
+    // show all images that are photographed by this user
+    echo "<h2>PHOTOGRAPHED IMAGES</h2>";
+    echo "<div class='images'>";
+
+    $sql_images = "SELECT * FROM images WHERE name_id = " . $_SESSION["name_id"];
+    $results_images = $dbconnection -> query($sql_images);
+
+    // checking for errors
+    if(!$results_images) {
+        echo "ERROR: " . $dbconnection -> error;
+    }
+
+    while($currentrow_images = $results_images -> fetch_assoc()) {
+        echo "<a href='details.php?yearbookID=" . $currentrow_images['image_id'] . "'>";
+        echo "<div class='card'>";
+        echo "<img src='Image Uploads/" . $currentrow_images['image_name'] . "' style='width: 100%;'>";
+        echo "</div>";
+        echo "</a>";
+    }
+
+    echo "</div>";
+
 
     ?>
 </div>
