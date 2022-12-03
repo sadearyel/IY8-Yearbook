@@ -58,16 +58,16 @@ $mysql = new mysqli(
             padding-bottom: 10px;
         }
         #intro {
-            padding-top: 125px;
-            padding-bottom: 125px;
+            padding-top: 50px;
+            padding-bottom: 50px;
             padding-left: calc(100% * (4 / 12));
             padding-right: calc(100% * (4 / 12));
 
             text-align: center;
         }
         #timeline {
-            padding-top: 125px;
-            padding-bottom: 125px;
+            padding-top: 75px;
+            padding-bottom: 50px;
             padding-left: calc(100% * (1 / 12));
             padding-right: calc(100% * (1 / 12));
 
@@ -125,6 +125,13 @@ $mysql = new mysqli(
         <br>
         Ellie, Iris, Jenna, Kate, Sade
     </p>
+</div>
+
+<div id="timeline">
+    <h1 class="section-title">
+        CATEGORIZED BY TAGGED EVENTS
+    </h1>
+    <img src="Site%20Images/timeline.png" style="width: 100%;">
 </div>
 
 <!--

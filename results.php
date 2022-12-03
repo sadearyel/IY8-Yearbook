@@ -20,6 +20,24 @@ if($dbconnection -> errno) {
     echo $dbconnection->connect_error;
     exit();
 }
+
+// data visualization code - log search to searches table only if the user is logged in
+if(!empty($_SESSION["user_id"])) {
+    $userid = $_SESSION["user_id"];
+
+    // grab event id from event table
+    $sql_search_event = "SELECT * FROM events WHERE event = '" . $_REQUEST["event"] . "'";
+    $results_search_event = $dbconnection -> query($sql_search_event);
+    $currentrow_search_event = $results_search_event -> fetch_assoc();
+
+    // insert search into searches table
+    $sql_searches = "INSERT INTO searches 
+    (event_id, searchtime, user_id) 
+    VALUES 
+    (" . $currentrow_search_event["event_id"] . ", '" . date('y-m-d H:i:s') . "', " . $userid . ")";
+
+    $results_searches = $dbconnection -> query($sql_searches);
+}
 ?>
 
 <html lang="en">
@@ -80,6 +98,15 @@ if($dbconnection -> errno) {
         // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM imagesView";
 
+        if($_REQUEST['date'] != " ") {
+            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Taken after date " . $_REQUEST["date"];
+        } else {
+            echo "Taken at any date";
+        }
+
+        echo "<br>";
+
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Photographed by " . $_REQUEST["name"];
@@ -94,15 +121,6 @@ if($dbconnection -> errno) {
             echo "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
-        }
-
-        echo "<br>";
-
-        if($_REQUEST['date'] != " ") {
-            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
-            echo "Taken after date " . $_REQUEST["date"];
-        } else {
-            echo "Taken at any date";
         }
 
         echo "<br><br>";
@@ -170,6 +188,15 @@ if($dbconnection -> errno) {
         // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM quotesView";
 
+        echo "<br>";
+
+        if($_REQUEST['date'] != " ") {
+            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Said after date " . $_REQUEST["date"];
+        } else {
+            echo "Said at any date";
+        }
+
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Said by " . $_REQUEST["name"];
@@ -184,15 +211,6 @@ if($dbconnection -> errno) {
             echo "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
-        }
-
-        echo "<br>";
-
-        if($_REQUEST['date'] != " ") {
-            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
-            echo "Said after date " . $_REQUEST["date"];
-        } else {
-            echo "Said at any date";
         }
 
         echo "<br><br>";
@@ -258,6 +276,15 @@ if($dbconnection -> errno) {
         // display images first
         $sql = "SELECT * FROM imagesView";
 
+        echo "<br>";
+
+        if($_REQUEST['date'] != " ") {
+            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Taken after date " . $_REQUEST["date"];
+        } else {
+            echo "Taken at any date";
+        }
+
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Photographed by " . $_REQUEST["name"];
@@ -272,15 +299,6 @@ if($dbconnection -> errno) {
             echo "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
-        }
-
-        echo "<br>";
-
-        if($_REQUEST['date'] != " ") {
-            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
-            echo "Taken after date " . $_REQUEST["date"];
-        } else {
-            echo "Taken at any date";
         }
 
         echo "<br><br>";
@@ -312,6 +330,15 @@ if($dbconnection -> errno) {
 
         $sql = "SELECT * FROM quotesView";
 
+        echo "<br>";
+
+        if($_REQUEST['date'] != " ") {
+            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
+            echo "Said after date " . $_REQUEST["date"];
+        } else {
+            echo "Said at any date";
+        }
+
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Said by " . $_REQUEST["name"];
@@ -327,16 +354,6 @@ if($dbconnection -> errno) {
         } else {
             echo "At any event";
         }
-
-        echo "<br>";
-
-        if($_REQUEST['date'] != " ") {
-            $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
-            echo "Said after date " . $_REQUEST["date"];
-        } else {
-            echo "Said at any date";
-        }
-
         echo "<br><br>";
 
         $results = $dbconnection -> query($sql);
