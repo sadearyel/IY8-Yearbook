@@ -116,7 +116,7 @@ $mysql = new mysqli(
 
 <div id="intro">
     <h1 class="section-title">
-        INTRO
+        IY8 YEARBOOK
     </h1>
     <p>
         A growing collection of memories from USC’s Iovine and Young Academy. Tagged images and funny quotes, conveniently categorized by date and event.

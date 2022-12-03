@@ -165,6 +165,17 @@ if($dbconnection -> errno) {
 
         <input type="submit" value="Search">
     </form>
+
+    <!-- Recent searches data visualization --!>
+    <?php
+    // Show recent searches only if the user is logged in
+    if(!empty($_SESSION["user_id"])) {
+        $myrecsql = "SELECT event_name FROM searches_view WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY searchtime DESC";
+
+        $db
+    }
+
+    ?>
 </div>
 
 <?php include "Global Elements/footer.php"; ?>
