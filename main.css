@@ -1,6 +1,8 @@
 body {
     margin: 0px;
     height: 100vh;
+    background-image: url("Site Images/background.png");
+    background-size: cover;
 }
 
 
