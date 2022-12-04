@@ -170,9 +170,15 @@ if($dbconnection -> errno) {
     <?php
     // Show recent searches only if the user is logged in
     if(!empty($_SESSION["user_id"])) {
-        $myrecsql = "SELECT event_name FROM searches_view WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY searchtime DESC";
+        // recent searches by one user
+        $myrecsql = "SELECT event FROM searchesView WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY searchtime DESC";
 
-        $db
+        $myresults = $dbconnection -> query($myrecsql);
+
+        // popular searches
+        $favsql = "SELECT count(*) AS count, event FROM searchesView GROUP BY event ORDER BY count DESC";
+
+        $favresults = $dbconnection -> query($favsql);
     }
 
     ?>
