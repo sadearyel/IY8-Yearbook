@@ -26,27 +26,30 @@ $favsql = "SELECT count(*) AS count, event_name
 FROM  searchesView
 GROUP BY event_name
 ORDER BY count DESC";
+
+$results = $dbconnection -> query($favsql);
+$myresults = $dbconnection -> query($myrecsql);
 ?>
 
-<table>
-    <tr>
-        <th>Most Popular Searched Events</th>
-        <th>Your Most Recent Searches</th>
-    </tr>
-    <tr>
-        <th>
-            <?php
-            $dbconnection -> query($favsql);
-            ?>
-        </th>
-        <th>
-            <?php
-            if(!empty($_SESSION["user_id"])) {
-                $dbconnection -> query($myrecsql);
-            } else {
-                echo "Please log in to view your most recent searches.";
-            }
-            ?>
-        </th>
-    </tr>
-</table>
+<p>Most Popular Searched Events</p>
+<?php
+$count=0;
+while($currentrow = mysqli_fetch_array($results) && $count>5) {
+    ++$count;
+    echo $currentrow["event_name"] . "<br>";
+    var_dump($currentrow);
+}
+?>
+
+<p>Your Most Recent Searches</p>
+<?php
+$count=0;
+if(!empty($_SESSION["user_id"])) {
+    while($currentrow = mysqli_fetch_array($myresults) && $count>5) {
+    ++$count;
+    echo $currentrow["event_name"] . "<br>";
+    var_dump($currentrow);
+} else {
+    echo "Please log in to view your most recent searches.";
+}
+?>
