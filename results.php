@@ -90,10 +90,21 @@ if(!empty($_SESSION["user_id"])) {
     // first see whether the user is searching for images, quotes, or both types of records
     if($_REQUEST['quoteImages'] == 'Images') { // only searching for images
 
+        // email results code - if the user is logged in, email their results to the email associated with their account
+        $message = "";
+
+        if(!empty($_SESSION["user_id"])) {
+            $message .= "Thank you for visting the <a href='http://webdev.iyaclasses.com/~icleung/acad276/IY8-Yearbook/index.php'>IY8 Yearbook</a> site. To ensure you don't forget the memories you've flipped through, we've decided to send over a quick summary of your finds.";
+            $message .= "<hr>";
+        }
+
         // first complete the rest of the result summary html block
         echo "IMAGES";
         echo "</h1>";
         echo "<p>";
+
+        $message .= "IMAGES";
+        $message .= "<br><br>";
 
         // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM imagesView";
@@ -101,35 +112,51 @@ if(!empty($_SESSION["user_id"])) {
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
             echo "Taken after date " . $_REQUEST["date"];
+            $message .= "Taken after date " . $_REQUEST["date"];
         } else {
             echo "Taken at any date";
+            $message .= "Taken at any date";
         }
 
         echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Photographed by " . $_REQUEST["name"];
+            $message .= "Photographed by " . $_REQUEST["name"];
         } else {
             echo "Photographed by anyone in the cohort";
+            $message .= "Photographed by anyone in the cohort";
         }
 
         echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
             echo "At event " . $_REQUEST["event"];
+            $message .= "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
+            $message .= "At any event";
         }
 
         echo "<br><br>";
+        $message .= "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
         echo $results -> num_rows;
         echo " image(s) </em>";
+
+        $message .= "<em>Your results returned ";
+        $message .= $results -> num_rows;
+        $message .= " image(s) </em>";
+        $message .= "<br><br>";
+        $message .= "Here are the first 20 results.";
+        $message .= "<br>";
 
         echo "<br><br>";
         echo "</p>";
@@ -155,6 +182,9 @@ if(!empty($_SESSION["user_id"])) {
             echo "<div class='link'>" . "" . "</div>";
             echo "</div>";
             echo "<br style='clear: both;'>";
+
+            $message .= "<img src='Image Uploads/" . $currentrow['image_name'] . "' class='thumb'>";
+            $message .= "<br style='clear: both;'>";
 
             if($i == $end) {
               break;
@@ -177,49 +207,93 @@ if(!empty($_SESSION["user_id"])) {
         echo "</div>";
         echo "</a>";
 
+        // email results code - email all the results
+        if(!empty($_SESSION["user_id"])) {
+            $sql_email = "SELECT * FROM users WHERE user_id = " . $_SESSION["user_id"];
+            $results_email = $dbconnection->query($sql_email);
+            $currentrow_email = $results_email->fetch_assoc();
+
+            $to = $currentrow_email["email"];
+            $subject = "Your Recent Search on IY8 Yearbook";
+
+            $test = mail($to, $subject, $message);
+
+            if($test == 1) {
+                echo "Email with your recent search has been successfully sent to " . $to . ".";
+            } else {
+                echo "ERROR. Email NOT sent.";
+            }
+        }
+
     } else if($_REQUEST['quoteImages'] == 'Quotes') { // only searching for quotes
+
+        // email results code - if the user is logged in, email their results to the email associated with their account
+        $message = "";
+
+        if(!empty($_SESSION["user_id"])) {
+            $message .= "Thank you for visting the <a href='http://webdev.iyaclasses.com/~icleung/acad276/IY8-Yearbook/index.php'>IY8 Yearbook</a> site. To ensure you don't forget the memories you've flipped through, we've decided to send over a quick summary of your finds.";
+            $message .= "<hr>";
+        }
 
         // first complete the rest of the result summary html block
         echo "QUOTES";
         echo "</h1>";
         echo "<p>";
 
+        $message .= "QUOTES";
+        $message .= "<br><br>";
 
         // back to regular sql statements to parse through the database
         $sql = "SELECT * FROM quotesView";
 
-        echo "<br>";
-
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
             echo "Said after date " . $_REQUEST["date"];
+            $message .= "Said after date " . $_REQUEST["date"];
         } else {
             echo "Said at any date";
+            $message .= "Said at any date";
         }
+
+        echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Said by " . $_REQUEST["name"];
+            $message .= "Said by " . $_REQUEST["name"];
         } else {
             echo "Said by anyone in the cohort";
+            $message .= "Said by anyone in the cohort";
         }
 
         echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
             echo "At event " . $_REQUEST["event"];
+            $message .= "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
+            $message .= "At any event";
         }
 
         echo "<br><br>";
+        $message .= "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
         echo $results -> num_rows;
         echo " quote(s) </em>";
+
+        $message .= "<em>Your results returned ";
+        $message .= $results -> num_rows;
+        $message .= " image(s) </em>";
+        $message .= "<br><br>";
+        $message .= "Here are the first 20 results.";
+        $message .= "<br>";
 
         echo "<br><br>";
         echo "</p>";
@@ -246,6 +320,9 @@ if(!empty($_SESSION["user_id"])) {
             echo "</div>";
             echo "<br style='clear: both;'>";
 
+            $message .= $currentrow['quote'];
+            $message .= "<br style='clear: both;'>";
+
             if($i == $end) {
                 break;
             }
@@ -267,47 +344,92 @@ if(!empty($_SESSION["user_id"])) {
         echo "</div>";
         echo "</a>";
 
+        // email results code - email all the results
+        if(!empty($_SESSION["user_id"])) {
+            $sql_email = "SELECT * FROM users WHERE user_id = " . $_SESSION["user_id"];
+            $results_email = $dbconnection->query($sql_email);
+            $currentrow_email = $results_email->fetch_assoc();
+
+            $to = $currentrow_email["email"];
+            $subject = "Your Recent Search on IY8 Yearbook";
+
+            $test = mail($to, $subject, $message);
+
+            if($test == 1) {
+                echo "Email with your recent search has been successfully sent to " . $to . ".";
+            } else {
+                echo "ERROR. Email NOT sent.";
+            }
+        }
+
     } else if($_REQUEST['quoteImages'] == 'Both') { // seaching for both
+
+        // email results code - if the user is logged in, email their results to the email associated with their account
+        $message = "";
+
+        if(!empty($_SESSION["user_id"])) {
+            $message .= "Thank you for visting the <a href='http://webdev.iyaclasses.com/~icleung/acad276/IY8-Yearbook/index.php'>IY8 Yearbook</a> site. To ensure you don't forget the memories you've flipped through, we've decided to send over a quick summary of your finds.";
+            $message .= "<hr>";
+        }
 
         echo "IMAGES AND QUOTES";
         echo "</h1>";
         echo "<p>";
 
+        $message .= "IMAGES AND QUOTES";
+        $message .= "<br><br>";
+
         // display images first
         $sql = "SELECT * FROM imagesView";
-
-        echo "<br>";
 
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
             echo "Taken after date " . $_REQUEST["date"];
+            $message .= "Taken after date " . $_REQUEST["date"];
         } else {
             echo "Taken at any date";
+            $message .= "Taken at any date";
         }
+
+        echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Photographed by " . $_REQUEST["name"];
+            $message .= "Photographed by " . $_REQUEST["name"];
         } else {
             echo "Photographed by anyone in the cohort";
+            $message .= "Photographed by anyone in the cohort";
         }
 
         echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
             echo "At event " . $_REQUEST["event"];
+            $message .= "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
+            $message .= "At any event";
         }
 
         echo "<br><br>";
+        $message .= "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
         echo $results -> num_rows;
         echo " image(s) </em>";
+
+        $message .= "<em>Your results returned ";
+        $message .= $results -> num_rows;
+        $message .= " image(s) </em>";
+        $message .= "<br><br>";
+        $message .= "Here are the first 20 results.";
+        $message .= "<br>";
 
         echo "<br><br>";
         echo "</p>";
@@ -322,45 +444,65 @@ if(!empty($_SESSION["user_id"])) {
             echo "<div class='link'>" . "" . "</div>";
             echo "</div>";
             echo "<br style='clear: both;'>";
+
+            $message .= "<img src='Image Uploads/" . $currentrow['image_name'] . "' class='thumb'>";
+            $message .= "<br style='clear: both;'>";
         }
 
         // display quotes second
         echo "<p>";
         echo "<br><br><br>";
+        $message .= "<br><br><br>";
 
         $sql = "SELECT * FROM quotesView";
-
-        echo "<br>";
 
         if($_REQUEST['date'] != " ") {
             $sql .= " WHERE date > '" . $_REQUEST["date"] . "'";
             echo "Said after date " . $_REQUEST["date"];
+            $message .= "Said after date " . $_REQUEST["date"];
         } else {
             echo "Said at any date";
+            $message .= "Said at any date";
         }
+
+        echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['name'] != 'ALL') {
             $sql .= " AND name = '" . $_REQUEST["name"] . "'";
             echo "Said by " . $_REQUEST["name"];
+            $message .= "Said by " . $_REQUEST["name"];
         } else {
             echo "Said by anyone in the cohort";
+            $message .= "Said by anyone in the cohort";
         }
 
         echo "<br>";
+        $message .= "<br>";
 
         if($_REQUEST['event'] != 'ALL') {
             $sql .= " AND event = '" . $_REQUEST["event"] . "'";
             echo "At event " . $_REQUEST["event"];
+            $message .= "At event " . $_REQUEST["event"];
         } else {
             echo "At any event";
+            $message .= "At any event";
         }
         echo "<br><br>";
+        $message .= "<br><br>";
 
         $results = $dbconnection -> query($sql);
 
         echo "<em>Your results returned ";
         echo $results -> num_rows;
         echo " quote(s) </em>";
+
+        $message .= "<em>Your results returned ";
+        $message .= $results -> num_rows;
+        $message .= " image(s) </em>";
+        $message .= "<br><br>";
+        $message .= "Here are the first 20 results.";
+        $message .= "<br>";
 
         echo "<br><br>";
         echo "</p>";
@@ -375,6 +517,27 @@ if(!empty($_SESSION["user_id"])) {
             echo "<div class='link'>" . "" . "</div>";
             echo "</div>";
             echo "<br style='clear: both;'>";
+
+            $message .= $currentrow['quote'];
+            $message .= "<br style='clear: both;'>";
+        }
+
+        // email results code - email all the results
+        if(!empty($_SESSION["user_id"])) {
+            $sql_email = "SELECT * FROM users WHERE user_id = " . $_SESSION["user_id"];
+            $results_email = $dbconnection->query($sql_email);
+            $currentrow_email = $results_email->fetch_assoc();
+
+            $to = $currentrow_email["email"];
+            $subject = "Your Recent Search on IY8 Yearbook";
+
+            $test = mail($to, $subject, $message);
+
+            if($test == 1) {
+                echo "Email with your recent search has been successfully sent to " . $to . ".";
+            } else {
+                echo "ERROR. Email NOT sent.";
+            }
         }
     }
     ?>
